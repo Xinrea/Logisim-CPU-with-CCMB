@@ -1,7 +1,7 @@
 //==================================================================================================
 //  Filename      : CONTROL.v
 //  Created On    : 2018-03-04 21:43:10
-//  Last Modified : 2018-03-04 21:57:19
+//  Last Modified : 2018-03-04 22:01:46
 //  Revision      : 
 //
 //  Description   : 
@@ -27,4 +27,6 @@ module CONTROL(in_is,out_J,out_JW,out_JR,out_BEQ,out_BNE,out_BGEZ,
 			instruction <= in_is[31:26];
 		end
 	end
+	JCONTROL m_JCONTROL(instruction,special,out_J,out_JW,out_JR,out_BEQ,out_BNE,out_BGEZ,out_MemWrite,out_half)
+	ARCONTROL m_ARCONTROL(special,instruction,out_IM,out_ALUmode,out_ALUinput,out_RegControl,out_syscall)
 endmodule
