@@ -1,4 +1,4 @@
-module DS_2ways(str, clk, clr, mode, address, extra_addr, data_in, data_out, extra_dout);
+module DS(str, clk, clr, mode, address, extra_addr, data_in, data_out, extra_dout);
     parameter AWIDTH = 12;  //地址字长，在这里可以直接修改,由于4k的限制，这里字节编址应该不超过12
     parameter DWIDTH = 32;  //数据字长
     input   str,    //信号：1时同步写入 
