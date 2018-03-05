@@ -1,7 +1,7 @@
 //==================================================================================================
 //  Filename      : counter.v
 //  Created On    : 2018-03-05 15:22:09
-//  Last Modified : 2018-03-05 15:32:36
+//  Last Modified : 2018-03-05 16:15:46
 //  Revision      : 
 //
 //  Description   : 
@@ -33,16 +33,16 @@ module counter(in_EN,in_CLK,in_RST,in_J,in_JS,in_loaduse,out_total,out_J,out_JS,
         end
         else begin
             if(in_EN)begin
-                total=total+1; 
+                out_total=out_total+1; 
                 flag=0;
             end
             else if(!in_EN&&(flag == 0))begin
-                total=total+1; 
+                out_total=out_total+1; 
                 flag=1;
             end
-            if(J)out_J=out_J+1;
-            if(JS)out_JS=out_JS+1;
-            if(loaduse)out_loaduse=out_loaduse+1;
+            if(in_J)out_J=out_J+1;
+            if(in_JS)out_JS=out_JS+1;
+            if(in_loaduse)out_loaduse=out_loaduse+1;
         end
 
     end

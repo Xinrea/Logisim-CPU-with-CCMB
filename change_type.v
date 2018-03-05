@@ -25,7 +25,7 @@ input [31:0]Mdata;
 input [31:0]PC;   //ÊäÈëpcµÄÖµ
 input [31:0]all_time;  //16Î»ÖÜÆÚÊý
 input [31:0]j_change;  //ÎÞÌõ¼þ·ÖÖ§Ö¸ÁîÊý
-input [31:0]b_change;  //ÓÐÌõ¼þ·ÖÖ§Ö¸ÁîÊý
+input [31:0]loaduse;  //ÓÐÌõ¼þ·ÖÖ§Ö¸ÁîÊý
 input [31:0]b_change_success ;  //ÓÐÌõ¼þ·ÖÖ§×ªÒÆ³É¹¦Êý
 //input reset;  //×Ü¿ª¹Ø
 input [2:0]pro_reset;   //3¸ö¿ª¹Ø×éºÏÀ´Ñ¡Ôñ¸÷ÖÖ²ÎÊý

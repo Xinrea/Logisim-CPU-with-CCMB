@@ -1,7 +1,7 @@
 //==================================================================================================
 //  Filename      : REDIRECTION.v
 //  Created On    : 2018-03-05 09:46:04
-//  Last Modified : 2018-03-05 11:45:34
+//  Last Modified : 2018-03-05 16:54:46
 //  Revision      : 
 //
 //  Description   : 
@@ -13,9 +13,10 @@ module REDIRECTION(in_EN,in_CLK,in_RST,in_J,in_JS,in_PPWE,in_PPPWE,in_IS,in_PIS,
 	input in_EN,in_CLK,in_RST,in_J,in_JS,in_PPWE,in_PPPWE;
 	input [31:0]in_IS,in_PIS,in_PPIS,in_PPPIS;
 	output reg out_DECLR,out_FDCLR,out_BEN,out_PEN;
-	output reg [3:0]out_ALUREDI,out_SYSREDI;
+	output reg [3:0]out_ALUREDI;
+	output [3:0]out_SYSREDI;
 	output reg [1:0]out_CSW;
-	output reg out_CLW;
+	output out_CLW;
 	
 	wire [5:0]FUNCT;
 	wire [4:0]RD;
@@ -61,11 +62,11 @@ module REDIRECTION(in_EN,in_CLK,in_RST,in_J,in_JS,in_PPWE,in_PPPWE,in_IS,in_PIS,
 	assign PPPRS = in_PPPIS[25:21];
 	assign PPPOP = in_PPPIS[31:26];
 
-	wire S1;
+	reg S1;
 	reg rBEN;
-	assign S1 = (IS==12)&(PRT==4|PRT==2);
 
 	always @(*) begin
+		S1 = (in_IS==12)&(PRT==4|PRT==2);
 		if(OP == 0)begin
 			out_BEN <= ~(((PRT==RT|PRT==RS)|S1)&(POP==6'b100011|POP==6'b100101))&in_EN;
 		end

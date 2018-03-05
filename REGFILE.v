@@ -1,7 +1,7 @@
 //==================================================================================================
 //  Filename      : REGFILE.v
 //  Created On    : 2018-03-04 22:04:58
-//  Last Modified : 2018-03-05 08:34:18
+//  Last Modified : 2018-03-05 16:27:25
 //  Revision      : 
 //
 //  Description   : 
@@ -15,7 +15,7 @@ module REGFILE(in_clk,in_syscall,in_regcontrol,in_Memdata,in_R,in_pcout,
 	input [31:0]in_Memdata,in_R,in_pcout;
 	input [4:0]in_p2,in_p4,in_ra,in_rb;
 	output [31:0]out_A,out_B;
-	reg rW;
+	reg [4:0]rW;
 	reg [4:0]rA,rB;
 	reg [31:0]W;
 	always @(*) begin

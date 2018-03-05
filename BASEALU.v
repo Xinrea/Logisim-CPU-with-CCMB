@@ -24,11 +24,11 @@ module BASEALU(X,Y,OP,OF,CF,EQ,R,R2);//全功能实现
     input [3:0]OP;
     output reg OF;
     output reg CF;
-    output reg EQ;
-    output reg [31:0]R;
-    output reg [31:0]R2;
-    reg [63:0]temp;
-    reg [32:0]overflow;
+    output reg EQ = 0;
+    output reg [31:0]R = 0;
+    output reg [31:0]R2 = 0;
+    reg [63:0]temp = 0;
+    reg [32:0]overflow = 0;
     always @(*)
     begin
         EQ<=(X==Y)?1:0;

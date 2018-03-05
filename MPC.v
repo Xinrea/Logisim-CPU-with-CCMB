@@ -1,7 +1,7 @@
 //==================================================================================================
 //  Filename      : MPC.v
 //  Created On    : 2018-03-04 16:36:14
-//  Last Modified : 2018-03-04 17:54:43
+//  Last Modified : 2018-03-05 17:00:32
 //  Revision      : 
 //
 //  Description   : 
@@ -12,7 +12,7 @@ module MPC(in_EN,in_CLOCK,in_RST,in_BGEZ,in_BEQ,in_BNE,in_J,in_JR,in_result,in_e
 	input in_EN,in_CLOCK,in_RST,in_BGEZ,in_BEQ,in_BNE,in_J,in_JR,in_result,in_equal;
 	input [31:0]in_extended,in_a,in_is;
 	output out_JS;
-	output reg [31:0]out_pcout;
+	output reg [31:0]out_pcout = 0;
 	wire cidi_control;
 	wire [31:0]new_pcin;
 	wire [31:0]pcin;

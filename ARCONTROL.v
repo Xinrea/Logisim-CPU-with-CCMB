@@ -1,7 +1,7 @@
 //==================================================================================================
 //  Filename      : ARCONTROL.v
 //  Created On    : 2018-03-04 20:47:40
-//  Last Modified : 2018-03-04 21:37:03
+//  Last Modified : 2018-03-05 17:05:28
 //  Revision      : 
 //
 //  Description   : 
@@ -11,11 +11,11 @@
 module ARCONTROL(in_special,in_func,out_IM,out_alumode,out_aluin,out_regcontrol,out_syscall);
     input in_special;
     input [5:0]in_func;
-    output reg out_IM;
-    output reg [3:0]out_alumode;
-    output reg [3:0]out_aluin;
-    output reg [4:0]out_regcontrol;
-    output reg out_syscall;
+    output reg out_IM = 0;
+    output reg [3:0]out_alumode = 0;
+    output reg [3:0]out_aluin = 0;
+    output reg [4:0]out_regcontrol = 0;
+    output reg out_syscall = 0;
     //添加指令及信号，请区分指令类型进行添加
     always @(*) begin
         if(in_special) begin

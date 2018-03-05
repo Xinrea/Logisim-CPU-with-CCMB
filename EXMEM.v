@@ -1,7 +1,7 @@
 //==================================================================================================
 //  Filename      : EXMEM.v
 //  Created On    : 2018-03-05 09:24:44
-//  Last Modified : 2018-03-05 09:33:42
+//  Last Modified : 2018-03-05 17:12:32
 //  Revision      : 
 //
 //  Description   : 
@@ -10,6 +10,7 @@
 //==================================================================================================
 module EXMEM(in_EN,in_CLK,in_CLR,in_lock,in_ra,in_rb,in_is,in_p2,in_p3,in_p4,in_pcout,in_control,in_R,
 	out_lock,out_ra,out_rb,out_is,out_p2,out_p3,out_p4,out_pcout,out_control,out_R);
+	input in_EN,in_CLK,in_CLR;
 	input in_lock;
 	input [31:0]in_is,in_pcout,in_ra,in_rb,in_R;
 	input [4:0]in_p2,in_p3,in_p4;
@@ -19,7 +20,20 @@ module EXMEM(in_EN,in_CLK,in_CLR,in_lock,in_ra,in_rb,in_is,in_p2,in_p3,in_p4,in_
 	output reg [31:0]out_is,out_pcout,out_ra,out_rb,out_R;
 	output reg [4:0]out_p2,out_p3,out_p4;
 	output reg [22:0]out_control;
+	initial begin
+			out_lock <= 0;
 
+			out_is <= 0;
+			out_pcout <= 0;
+			out_ra <= 0;
+			out_rb <= 0;
+			out_R <= 0;
+
+			out_p2 <= 0;
+			out_p3 <= 0;
+			out_p4 <= 0;
+			out_control <= 0;
+	end
 	always @(posedge in_CLK or posedge in_CLR) begin
 		if (in_CLR) begin
 			// reset
