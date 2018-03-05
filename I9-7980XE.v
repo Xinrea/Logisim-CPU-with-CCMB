@@ -1,7 +1,7 @@
 //==================================================================================================
 //  Filename      : I9-7980XE.v
 //  Created On    : 2018-03-05 13:39:32
-//  Last Modified : 2018-03-05 17:00:14
+//  Last Modified : 2018-03-05 18:52:30
 //  Revision      : 
 //
 //  Description   : 
@@ -117,7 +117,7 @@ module I9_7980XE(clk,in_RST,pro_reset,in_addr,changef,leds,SEG,AN);
 	wire [4:0]WB_p3;
 	wire [22:0]WB_control;
 	MEMWB m_MEMWB(EN,in_CLK,in_RST,MEM_lock,MEM_ra,MEM_rb,MEM_is,MEM_p2,MEM_p3,MEM_p4,MEM_pcout,MEM_control,MEM_R,MEM_Memdata,WB_lock,WB_ra,WB_rb,WB_is,WB_p2,WB_p3,WB_p4,WB_PCOUT,WB_control,WB_R);
-
+	assign WB_regcontrol = WB_control[13:9];
 	wire CLW;
 	always @(*) begin
 		if(CLW)WB_WB <= WB_Memdata;
