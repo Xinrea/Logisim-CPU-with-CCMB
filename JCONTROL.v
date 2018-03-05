@@ -14,13 +14,13 @@ module JCONTROL(in_instruction,in_special,
 	input in_special;
 	output reg out_J,out_JW,out_JR,out_BEQ,out_BNE,out_BGEZ,out_MemWrite,out_half;
 	always @(*) begin
-		out_J = ~in_special&~in_instruction[5]&~in_instruction[3]&in_instruction[1];
-		out_JW = ~in_special&~in_instruction[5]&~in_instruction[3]&~in_instruction[1];
-		out_JR = in_special&in_instruction[3]&~in_instruction[2]&~in_instruction[1];
-		out_BEQ = ~in_special&~in_instruction[3]&~in_instruction[1]&~in_instruction[0];
-		out_BNE = ~in_instruction[5]&~in_instruction[2]&in_instruction[2]&in_instruction[0];
-		out_BGEZ = ~in_special&~in_instruction[3]&~in_instruction[2]&~in_instruction[1];
-		out_MemWrite = ~in_special&in_instruction[5]&in_instruction[3];
-		out_half = ~in_special&in_instruction[5]&~in_instruction[1];
+		out_J <= (~in_special&~in_instruction[5]&~in_instruction[3]&in_instruction[1])|(in_special&in_instruction[3]&~in_instruction[2]&~in_instruction[1]);
+		out_JW <= ~in_special&~in_instruction[5]&~in_instruction[3]&~in_instruction[1];
+		out_JR <= in_special&in_instruction[3]&~in_instruction[2]&~in_instruction[1];
+		out_BEQ <= ~in_special&~in_instruction[3]&~in_instruction[1]&~in_instruction[0];
+		out_BNE <= !in_instruction[5]&&!in_instruction[3]&&in_instruction[2]&&in_instruction[0];
+		out_BGEZ <= ~in_special&~in_instruction[3]&~in_instruction[2]&~in_instruction[1];
+		out_MemWrite <= ~in_special&in_instruction[5]&in_instruction[3];
+		out_half <= ~in_special&in_instruction[5]&~in_instruction[1];
 	end
 endmodule

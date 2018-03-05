@@ -144,11 +144,11 @@ module REDIRECTION(in_EN,in_CLK,in_RST,in_J,in_JS,in_PPWE,in_PPPWE,in_IS,in_PIS,
 			end
 			2'b10:begin
 				out_ALUREDI[0] <= (((PPRT==PRS))^(shift_is))&(in_PPWE&IGNORE&(BIS|((PPRT==PRT|PPRT==PRS)&~(in_PIS==0)&~(in_PPIS==0))));
-				out_ALUREDI[1] <= ((PPRT==PRT)^(shift_is))&(in_PPWE&IGNORE&(BIS|(PPRT==PRS&~(in_PIS==0)&~(in_PPIS==0))));
+				out_ALUREDI[1] <= ((PPRT==PRT)^(shift_is))&(in_PPWE&IGNORE&(BIS|((PPRT==PRT|PPRT==PRS)&~(in_PIS==0)&~(in_PPIS==0))));
 			end
 			2'b11:begin
-				out_ALUREDI[0] <= (((PPRD==PRS))^(shift_is))&(in_PPWE&IGNORE&(BIS|((PPRD==PRT|PPRT==PRS)&~(in_PIS==0)&~(in_PPIS==0))));
-				out_ALUREDI[1] <= ((PPRD==PRT)^(shift_is))&(in_PPWE&IGNORE&(BIS|(PPRT==PRS&~(in_PIS==0)&~(in_PPIS==0))));
+				out_ALUREDI[0] <= (((PPRD==PRS))^(shift_is))&(in_PPWE&IGNORE&(BIS|((PPRD==PRT|PPRD==PRS)&~(in_PIS==0)&~(in_PPIS==0))));
+				out_ALUREDI[1] <= ((PPRD==PRT)^(shift_is))&(in_PPWE&IGNORE&(BIS|((PPRD==PRT|PPRD==PRS)&~(in_PIS==0)&~(in_PPIS==0))));
 			end
 		endcase
 	end

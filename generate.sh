@@ -1,2 +1,0 @@
-iverilog -o test testbench.v I9-7980XE.v DIVIDER.v led.v counter.v change_type.v display.v MPC.v IS.v IFID.v CONTROL.v DECODE.v REGFILE.v IDEX.v MALU.v SWRE.v EXMEM.v DS.v MEMWB.v REDIRECTION.v CIDI.v PCC.v UCIDI.v EXTENDER.v JCONTROL.v BASEALU.v ARCONTROL.v BASEREGFILE.v SYSCALL.v
-vvp -n test -lxt2

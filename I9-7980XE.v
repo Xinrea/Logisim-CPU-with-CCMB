@@ -16,13 +16,15 @@ module I9_7980XE(clk,in_RST,pro_reset,in_addr,changef,leds,SEG,AN);
 	output [15:0]leds;
 	output [7:0]SEG;
     output [7:0]AN;
+    wire new_CLK;
+    reg in_CLK;
 
-    DIVIDER m_DIVIDER(clk,changef,in_CLK);
+    DIVIDER m_DIVIDER(clk,changef,new_CLK);
     wire EN;
     wire DECLR,FDCLR;
     wire [31:0]extra_data;
     wire loaduse;
-    assign loaduse = DECLR|FDCLR;
+    assign loaduse = DECLR;
     wire [31:0]ctotal,cJ,cJS,cloaduse,datatoshow;
     wire BEN,EX_BGEZ,EX_BEQ,EX_BNE,EX_J,EX_JR,EX_result,EX_equal;
     wire [31:0]EX_extended,EX_A,EX_IS,PCOUT;
@@ -34,6 +36,11 @@ module I9_7980XE(clk,in_RST,pro_reset,in_addr,changef,leds,SEG,AN);
     counter m_counter(EN,in_CLK,in_RST,EX_J,JS,loaduse,ctotal,cJ,cJS,cloaduse);
     change_type m_changetype(in_CLK,EX_syscallout,extra_data,PCOUT,ctotal,cJ,cloaduse,cJS,pro_reset,datatoshow);
     display m_display(clk,datatoshow,SEG,AN);
+
+    always @(*) begin
+    	if(~EN)in_CLK <= 1;
+    	else in_CLK <= new_CLK;
+    end
 
 	MPC m_MPC(BEN,in_CLK,in_RST,EX_BGEZ,EX_BEQ,EX_BNE,EX_J,EX_JR,EX_result,EX_equal,EX_extended,EX_A,EX_IS,JS,PCOUT);
 	
@@ -116,8 +123,10 @@ module I9_7980XE(clk,in_RST,pro_reset,in_addr,changef,leds,SEG,AN);
 	wire [31:0]WB_is,WB_ra;
 	wire [4:0]WB_p3;
 	wire [22:0]WB_control;
-	MEMWB m_MEMWB(EN,in_CLK,in_RST,MEM_lock,MEM_ra,MEM_rb,MEM_is,MEM_p2,MEM_p3,MEM_p4,MEM_pcout,MEM_control,MEM_R,MEM_Memdata,WB_lock,WB_ra,WB_rb,WB_is,WB_p2,WB_p3,WB_p4,WB_PCOUT,WB_control,WB_R);
+	MEMWB m_MEMWB(EN,in_CLK,in_RST,MEM_lock,MEM_ra,MEM_rb,MEM_is,MEM_p2,MEM_p3,MEM_p4,MEM_pcout,MEM_control,MEM_R,MEM_Memdata,WB_lock,WB_ra,WB_rb,WB_is,WB_p2,WB_p3,WB_p4,WB_PCOUT,WB_control,WB_R,WB_Memdata);
 	assign WB_regcontrol = WB_control[13:9];
+	assign WB_half = WB_control[16];
+	assign WB_Memwrite = WB_control[15];
 	wire CLW;
 	always @(*) begin
 		if(CLW)WB_WB <= WB_Memdata;

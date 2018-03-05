@@ -32,7 +32,7 @@ input [2:0]pro_reset;   //3¸ö¿ª¹Ø×éºÏÀ´Ñ¡Ôñ¸÷ÖÖ²ÎÊý
 
 output reg [31:0]chose_out;   //31Î»µÄÊýÂë¹ÜÏÔÊ¾Êý¾Ý
 
-always @(posedge clk)
+always @(*)
 begin
    case(pro_reset)
     3'b001:begin

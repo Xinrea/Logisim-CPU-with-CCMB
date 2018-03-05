@@ -9,7 +9,7 @@
 //
 //==================================================================================================
 module MEMWB(in_EN,in_CLK,in_CLR,in_lock,in_ra,in_rb,in_is,in_p2,in_p3,in_p4,in_pcout,in_control,in_R,in_Memdata,
-	out_lock,out_ra,out_rb,out_is,out_p2,out_p3,out_p4,out_pcout,out_control,out_R);
+	out_lock,out_ra,out_rb,out_is,out_p2,out_p3,out_p4,out_pcout,out_control,out_R,out_Memdata);
 	input in_EN,in_CLK,in_CLR;
 	input in_lock;
 	input [31:0]in_is,in_pcout,in_ra,in_rb,in_R,in_Memdata;

@@ -23,7 +23,7 @@ module counter(in_EN,in_CLK,in_RST,in_J,in_JS,in_loaduse,out_total,out_J,out_JS,
         flag=0;
     end
 
-    always @(posedge in_CLK)begin
+    always @(negedge in_CLK)begin
         if(in_RST)begin 
             flag=0;
             out_total=0;
