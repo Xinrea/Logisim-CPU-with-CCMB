@@ -1,15 +1,34 @@
 //==================================================================================================
 //  Filename      : I9-7980XE.v
 //  Created On    : 2018-03-05 13:39:32
-//  Last Modified : 2018-03-05 14:42:43
+//  Last Modified : 2018-03-05 15:41:59
 //  Revision      : 
 //
 //  Description   : 
 //
 //
 //==================================================================================================
-module I9_7980XE(in_CLK,in_RST);
-	input in_CLK,in_RST;
+module I9_7980XE(clk,in_RST,pro_reset,in_addr,changef,leds,SEG,AN);
+	input clk,in_RST;
+	input [2:0]pro_reset;
+	input [11:0]in_addr;
+    input changef;
+	output [15:0]leds;
+	output [7:0]SEG;
+    output [7:0]AN;
+
+    DIVIDER m_DIVIDER(clk,changef,in_CLK);
+    wire EN;
+    wire DECLR,FDCLR;
+    wire [31:0]extra_data;
+    wire loaduse;
+    assign loaduse = DECLR|FDCLR;
+    wire [31:0]ctotal,cJ,cJS,cloaduse,datatoshow;
+    led m_led(in_RST,pro_reset,in_addr,leds);
+    counter m_counter(EN,in_CLK,in_RST,EX_J,JS,loaduse,ctotal,cJ,cJS,cloaduse);
+    change_type m_changetype(in_CLK,EX_syscallout,extra_data,PCOUT,ctotal,cJ,cloaduse,cJS,pro_reset,datatoshow);
+    display m_display(clk,datatoshow,SEG,AN);
+
 	wire BEN,EX_BGEZ,EX_BEQ,EX_BNE,EX_J,EX_JR,EX_result,EX_equal;
 	wire [31:0]EX_extended,EX_A,EX_IS,PCOUT;
 	MPC m_MPC(BEN,in_CLK,in_RST,EX_BGEZ,EX_BNE,EX_J,EX_JR,EX_result,EX_equal,EX_extended,EX_A,EX_IS,JS,PCOUT);
@@ -17,7 +36,6 @@ module I9_7980XE(in_CLK,in_RST);
 	wire [31:0]instruction;
 	IS m_IS(PCOUT[23:0],instruction);
 
-	wire FDCLR;
 	wire [31:0]ID_PCOUT,ID_IS;
 	IFID m_IFID(BEN,in_CLK,FDCLR,PCOUT,instruction,ID_PCOUT,ID_IS);
 
@@ -36,7 +54,7 @@ module I9_7980XE(in_CLK,in_RST);
 	wire [31:0]WB_Memdata,WB_R,WB_PCOUT,WB_p2,WB_p4,ID_A,ID_B;
 	REGFILE m_REGFILE(in_CLK,ID_syscall,WB_regcontrol,,WB_Memdata,WB_R,WB_PCOUT,WB_p2,WB_p4,ID_p3,ID_p2,ID_A,ID_B);
 
-	wire EN,DECLR;
+
 	wire [22:0]ID_control;
 	assign ID_control[0] = ID_IM;
 	assign ID_control[4:1] = ID_ALUmode;
@@ -76,12 +94,35 @@ module I9_7980XE(in_CLK,in_RST);
 	EXMEM m_EXMEM(EN,in_CLK,in_RST,EX_lock,EX_IS,EX_pcout,EX_A,EX_B2,EX_R,EX_p2,EX_p3,EX_p4,EX_control,MEM_lock,MEM_is,MEM_pcout,MEM_ra,MEM_rb,MEM_R,MEM_p2,MEM_p3,MEM_p4,MEM_control);
 
 	reg [11:0]addr;
+	wire [1:0]mode;
+	wire WB_Memwrite,WB_half;
+	wire [31:0]MEM_Memdata;
+	wire [31:0]WB_B;
+	assign mode[0] = 0;
+	assign mode[1] = WB_half;
 	always @(*) begin
 		if(WB_Memwrite)addr <= WB_R[11:0];
 		else begin
 			addr <= MEM_R[11:0];
 		end
 	end
+	DS m_DS(WB_Memwrite,in_CLK,in_RST,mode,addr,in_addr,WB_B,MEM_Memdata,extra_data);
 
-	DS m_DS();
+	wire WB_lock;
+	wire [31:0]WB_is,WB_pcout,WB_ra,WB_rb,WB_R,WB_Memdata;
+	wire [4:0]WB_p2,WB_p3,WB_p4;
+	wire [22:0]WB_control;
+	MEMWB m_MEMWB(EN,in_CLK,in_RST,MEM_lock,MEM_is,MEM_pcout,MEM_ra,MEM_rb,MEM_R,MEM_Memdata,MEM_p2,MEM_p3,MEM_p4,MEM_control);
+
+	wire CLW;
+
+	always @(*) begin
+		if(CLW)WB_WB <= WB_Memdata;
+		else begin
+			WB_WB <= WB_R;
+		end
+	end
+
+	wire PEN;
+	REDIRECTION m_REDIRECTION(EN,in_CLK,in_RST,EX_J,JS,MEM_control[11],WB_control[11],ID_IS,EX_IS,MEM_is,WB_is,DECLR,FDCLR,BEN,PEN,ALUREDI,SYSREDI,CSW,CLW);
 endmodule
