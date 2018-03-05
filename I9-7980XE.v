@@ -112,13 +112,13 @@ module I9_7980XE(clk,in_RST,pro_reset,in_addr,changef,leds,SEG,AN);
 	DS m_DS(WB_Memwrite,in_CLK,in_RST,mode,addr,in_addr,WB_rb,MEM_Memdata,extra_data);
 
 	wire WB_lock;
+	assign EN = ~WB_lock;
 	wire [31:0]WB_is,WB_ra;
 	wire [4:0]WB_p3;
 	wire [22:0]WB_control;
 	MEMWB m_MEMWB(EN,in_CLK,in_RST,MEM_lock,MEM_ra,MEM_rb,MEM_is,MEM_p2,MEM_p3,MEM_p4,MEM_pcout,MEM_control,MEM_R,MEM_Memdata,WB_lock,WB_ra,WB_rb,WB_is,WB_p2,WB_p3,WB_p4,WB_PCOUT,WB_control,WB_R);
 
 	wire CLW;
-
 	always @(*) begin
 		if(CLW)WB_WB <= WB_Memdata;
 		else begin

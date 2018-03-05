@@ -12,7 +12,7 @@ module SYSCALL(in_CLK,in_RST,in_syscall,in_v0,in_a0,out_display,out_lock);
 	input in_CLK,in_RST,in_syscall;
 	input [31:0]in_v0,in_a0;
 	output reg [31:0]out_display;
-	output reg out_lock;
+	output reg out_lock = 0;
 	always @(posedge in_CLK or posedge in_RST) begin
 		if (in_RST) begin
 			// reset

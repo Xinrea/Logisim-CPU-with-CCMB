@@ -14,6 +14,8 @@ module DECODE(in_IM,in_is,out_p1,out_im,out_p2,out_p3,out_p4);
 	output [31:0]out_p1;
 	output [31:0]out_im;
 	output [4:0]out_p2,out_p3,out_p4;
+	assign out_p1[4:0] = in_is[10:6];
+	assign out_p1[31:5] = 0;
 	assign out_p2 = in_is[20:16];
 	assign out_p3 = in_is[25:21];
 	assign out_p4 = in_is[15:11];

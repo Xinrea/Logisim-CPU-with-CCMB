@@ -27,7 +27,7 @@ initial
 assign A = register[rA];
 assign B = register[rB];
 
-always @(posedge clk)
+always @(negedge clk)
 	begin
 		if ((rW != 0) && (WE == 1))
 			begin
