@@ -1,7 +1,7 @@
 //==================================================================================================
 //  Filename      : I9-7980XE.v
 //  Created On    : 2018-03-05 13:39:32
-//  Last Modified : 2018-03-05 18:52:30
+//  Last Modified : 2018-03-06 15:10:28
 //  Revision      : 
 //
 //  Description   : 
@@ -32,6 +32,7 @@ module I9_7980XE(clk,in_RST,pro_reset,in_addr,changef,leds,SEG,AN);
     reg [31:0]WB_WB = 0;
 	wire [31:0]EX_R,EX_syscallout,EX_B2;
 	wire [3:0]ALUREDI,SYSREDI;
+	wire R_FDCLR,R_DECLR,R_EECLR;
     led m_led(in_RST,pro_reset,in_addr,leds);
     counter m_counter(EN,in_CLK,in_RST,EX_J,JS,loaduse,ctotal,cJ,cJS,cloaduse);
     change_type m_changetype(in_CLK,EX_syscallout,extra_data,PCOUT,ctotal,cJ,cloaduse,cJS,pro_reset,datatoshow);
@@ -42,19 +43,21 @@ module I9_7980XE(clk,in_RST,pro_reset,in_addr,changef,leds,SEG,AN);
     	else in_CLK <= new_CLK;
     end
 
-	MPC m_MPC(BEN,in_CLK,in_RST,EX_BGEZ,EX_BEQ,EX_BNE,EX_J,EX_JR,EX_result,EX_equal,EX_extended,EX_A,EX_IS,JS,PCOUT);
+    wire FORCE;//for break and eret
+    wire [31:0]FADDR;
+	MPC m_MPC(BEN,in_CLK,in_RST,EX_BGEZ,EX_BEQ,EX_BNE,EX_J,EX_JR,EX_result,EX_equal,EX_extended,EX_A,EX_IS,FORCE,FADDR,JS,PCOUT);
 	
 	wire [31:0]instruction;
 	IS m_IS(PCOUT[9:0],instruction);
 
 	wire [31:0]ID_PCOUT,ID_IS;
-	IFID m_IFID(BEN,in_CLK,FDCLR,PCOUT,instruction,ID_PCOUT,ID_IS);
+	IFID m_IFID(BEN,in_CLK,R_FDCLR,PCOUT,instruction,ID_PCOUT,ID_IS);
 
-	wire ID_J,ID_JW,ID_JR,ID_BEQ,ID_BNE,ID_BGEZ,ID_MemWrite,ID_half,ID_syscall,ID_IM;
+	wire ID_J,ID_JW,ID_JR,ID_BEQ,ID_BNE,ID_BGEZ,ID_MemWrite,ID_half,ID_syscall,ID_IM,ID_cp0,ID_cpw,ID_eret;
 	wire [3:0]ID_ALUmode;
 	wire [3:0]ID_ALUinput;
 	wire [4:0]ID_RegControl;
-	CONTROL m_CONTROL(ID_IS,ID_J,ID_JW,ID_JR,ID_BEQ,ID_BNE,ID_BGEZ,ID_MemWrite,ID_half,ID_syscall,ID_IM,ID_ALUmode,ID_ALUinput,ID_RegControl);
+	CONTROL m_CONTROL(ID_IS,ID_J,ID_JW,ID_JR,ID_BEQ,ID_BNE,ID_BGEZ,ID_MemWrite,ID_half,ID_syscall,ID_IM,ID_ALUmode,ID_ALUinput,ID_RegControl,ID_cp0,ID_cpw,ID_eret);
 
 	wire [31:0]ID_p1;
 	wire [31:0]ID_imm;
@@ -62,12 +65,13 @@ module I9_7980XE(clk,in_RST,pro_reset,in_addr,changef,leds,SEG,AN);
 	DECODE m_DECODE(ID_IM,ID_IS,ID_p1,ID_imm,ID_p2,ID_p3,ID_p4);
 
 	wire [4:0]WB_regcontrol;
-	wire [31:0]WB_Memdata,WB_R,WB_PCOUT,ID_A,ID_B;
+	wire [31:0]WB_Memdata,WB_R,WB_PCOUT,ID_A,ID_B,ID_EPC;
 	wire [4:0]WB_p2,WB_p4;
-	REGFILE m_REGFILE(in_CLK,ID_syscall,WB_regcontrol,WB_Memdata,WB_R,WB_PCOUT,WB_p2,WB_p4,ID_p3,ID_p2,ID_A,ID_B);
+	wire WB_cp0,WB_cpw;
+	REGFILE m_REGFILE(in_CLK,ID_syscall,WB_regcontrol,WB_Memdata,WB_R,WB_PCOUT,WB_cp0,ID_cpw,WB_p2,WB_p4,ID_p4,ID_p3,ID_p2,ID_A,ID_B,ID_EPC);
 
 
-	wire [22:0]ID_control;
+	wire [25:0]ID_control;
 	assign ID_control[0] = ID_IM;
 	assign ID_control[4:1] = ID_ALUmode;
 	assign ID_control[8:5] = ID_ALUinput;
@@ -81,10 +85,13 @@ module I9_7980XE(clk,in_RST,pro_reset,in_addr,changef,leds,SEG,AN);
 	assign ID_control[20] = ID_JR;
 	assign ID_control[21] = ID_BEQ;
 	assign ID_control[22] = ID_BNE;
+	assign ID_control[23] = ID_cp0;
+	assign ID_control[24] = ID_cpw;
+	assign ID_control[25] = ID_eret;
 	wire [31:0]EX_pcout,EX_B,EX_p1;
 	wire [4:0]EX_p2,EX_p3,EX_p4;
-	wire [22:0]EX_control;
-	IDEX m_IDEX(EN,in_CLK,DECLR,ID_IS,ID_p2,ID_p3,ID_p4,ID_PCOUT,ID_A,ID_B,ID_control,ID_p1,ID_imm,EX_IS,EX_p2,EX_p3,EX_p4,EX_pcout,EX_A,EX_B,EX_control,EX_p1,EX_extended);
+	wire [25:0]EX_control;
+	IDEX m_IDEX(EN,in_CLK,R_DECLR,ID_IS,ID_p2,ID_p3,ID_p4,ID_PCOUT,ID_A,ID_B,ID_control,ID_p1,ID_imm,EX_IS,EX_p2,EX_p3,EX_p4,EX_pcout,EX_A,EX_B,EX_control,EX_p1,EX_extended);
 
 	assign EX_BGEZ = EX_control[14];
 	assign EX_BNE = EX_control[22];
@@ -100,8 +107,8 @@ module I9_7980XE(clk,in_RST,pro_reset,in_addr,changef,leds,SEG,AN);
 	wire MEM_lock;
 	wire [31:0]MEM_is,MEM_pcout,MEM_ra,MEM_rb;
 	wire [4:0]MEM_p2,MEM_p3,MEM_p4;
-	wire [22:0]MEM_control;
-	EXMEM m_EXMEM(EN,in_CLK,in_RST,EX_lock,EX_A,EX_B2,EX_IS,EX_p2,EX_p3,EX_p4,EX_pcout,EX_control,EX_R,MEM_lock,MEM_ra,MEM_rb,MEM_is,MEM_p2,MEM_p3,MEM_p4,MEM_pcout,MEM_control,MEM_R);
+	wire [25:0]MEM_control;
+	EXMEM m_EXMEM(EN,in_CLK,R_EECLR,EX_lock,EX_A,EX_B2,EX_IS,EX_p2,EX_p3,EX_p4,EX_pcout,EX_control,EX_R,MEM_lock,MEM_ra,MEM_rb,MEM_is,MEM_p2,MEM_p3,MEM_p4,MEM_pcout,MEM_control,MEM_R);
 
 	reg [11:0]addr;
 	wire [1:0]mode;
@@ -122,11 +129,20 @@ module I9_7980XE(clk,in_RST,pro_reset,in_addr,changef,leds,SEG,AN);
 	assign EN = ~WB_lock;
 	wire [31:0]WB_is,WB_ra;
 	wire [4:0]WB_p3;
-	wire [22:0]WB_control;
+	wire [25:0]WB_control;
+	wire WB_eret;
 	MEMWB m_MEMWB(EN,in_CLK,in_RST,MEM_lock,MEM_ra,MEM_rb,MEM_is,MEM_p2,MEM_p3,MEM_p4,MEM_pcout,MEM_control,MEM_R,MEM_Memdata,WB_lock,WB_ra,WB_rb,WB_is,WB_p2,WB_p3,WB_p4,WB_PCOUT,WB_control,WB_R,WB_Memdata);
 	assign WB_regcontrol = WB_control[13:9];
 	assign WB_half = WB_control[16];
 	assign WB_Memwrite = WB_control[15];
+	assign WB_cp0 = WB_control[23];
+	assign WB_cpw = WB_control[24];
+	assign WB_eret = WB_control[25];
+	assign FORCE = WB_eret;
+	assign FADDR = ID_EPC;
+	assign R_FDCLR = FORCE|FDCLR;
+	assign R_DECLR = FORCE|DECLR;
+	assign R_EECLR = FORCE|in_RST;
 	wire CLW;
 	always @(*) begin
 		if(CLW)WB_WB <= WB_Memdata;

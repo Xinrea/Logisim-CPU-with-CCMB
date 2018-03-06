@@ -1,7 +1,7 @@
 //==================================================================================================
 //  Filename      : EXMEM.v
 //  Created On    : 2018-03-05 09:24:44
-//  Last Modified : 2018-03-05 17:12:32
+//  Last Modified : 2018-03-06 14:56:09
 //  Revision      : 
 //
 //  Description   : 
@@ -14,12 +14,12 @@ module EXMEM(in_EN,in_CLK,in_CLR,in_lock,in_ra,in_rb,in_is,in_p2,in_p3,in_p4,in_
 	input in_lock;
 	input [31:0]in_is,in_pcout,in_ra,in_rb,in_R;
 	input [4:0]in_p2,in_p3,in_p4;
-	input [22:0]in_control;
+	input [25:0]in_control;
 
 	output reg out_lock;
 	output reg [31:0]out_is,out_pcout,out_ra,out_rb,out_R;
 	output reg [4:0]out_p2,out_p3,out_p4;
-	output reg [22:0]out_control;
+	output reg [25:0]out_control;
 	initial begin
 			out_lock <= 0;
 
