@@ -358,7 +358,6 @@ add    $a0,$0,$s1       #display $s1
 addi   $v0,$0,34         # display hex
 syscall                 # we are out of here.  
 
-sra $s1, $s1, 3    #$s1=0X80000000-->0XF0000000
 
 add    $a0,$0,$s1       #display $s1
 addi   $v0,$0,34         # display hex
@@ -440,8 +439,6 @@ add    $a0,$0,$s1       #display $s1
 addi   $v0,$0,34         # display hex
 syscall                 # we are out of here.  
 
-sra $s1, $s1, 3    #$s1=0X80000000-->0XF0000000
-
 add    $a0,$0,$s1       #display $s1
 addi   $v0,$0,34         # display hex
 syscall                 # we are out of here.  
@@ -521,8 +518,6 @@ sll $s1, $s1, 28   #Âß¼­×óÒÆ31Î» $s1=0x80000000
 add    $a0,$0,$s1       #display $s1
 addi   $v0,$0,34         # display hex
 syscall                 # we are out of here.  
-
-sra $s1, $s1, 3    #$s1=0X80000000-->0XF0000000
 
 add    $a0,$0,$s1       #display $s1
 addi   $v0,$0,34         # display hex
@@ -604,7 +599,6 @@ add    $a0,$0,$s1       #display $s1
 addi   $v0,$0,34         # display hex
 syscall                 # we are out of here.  
 
-sra $s1, $s1, 3    #$s1=0X80000000-->0XF0000000
 
 add    $a0,$0,$s1       #display $s1
 addi   $v0,$0,34         # display hex

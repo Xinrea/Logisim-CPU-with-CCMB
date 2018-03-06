@@ -8,18 +8,20 @@
 //
 //
 //==================================================================================================
-module EXMEM(in_EN,in_CLK,in_CLR,in_lock,in_ra,in_rb,in_is,in_p2,in_p3,in_p4,in_pcout,in_control,in_R,
-	out_lock,out_ra,out_rb,out_is,out_p2,out_p3,out_p4,out_pcout,out_control,out_R);
+module EXMEM(in_EN,in_CLK,in_CLR,in_lock,in_ra,in_rb,in_is,in_p2,in_p3,in_p4,in_pcout,in_control,in_R,in_BPCOUT,
+	out_lock,out_ra,out_rb,out_is,out_p2,out_p3,out_p4,out_pcout,out_control,out_R,out_BPCOUT);
 	input in_EN,in_CLK,in_CLR;
 	input in_lock;
 	input [31:0]in_is,in_pcout,in_ra,in_rb,in_R;
 	input [4:0]in_p2,in_p3,in_p4;
 	input [25:0]in_control;
+	input [31:0]in_BPCOUT;
 
 	output reg out_lock;
 	output reg [31:0]out_is,out_pcout,out_ra,out_rb,out_R;
 	output reg [4:0]out_p2,out_p3,out_p4;
 	output reg [25:0]out_control;
+	output reg [31:0]out_BPCOUT;
 	initial begin
 			out_lock <= 0;
 
@@ -33,6 +35,7 @@ module EXMEM(in_EN,in_CLK,in_CLR,in_lock,in_ra,in_rb,in_is,in_p2,in_p3,in_p4,in_
 			out_p3 <= 0;
 			out_p4 <= 0;
 			out_control <= 0;
+			out_BPCOUT <= 0;
 	end
 	always @(posedge in_CLK or posedge in_CLR) begin
 		if (in_CLR) begin
@@ -49,6 +52,7 @@ module EXMEM(in_EN,in_CLK,in_CLR,in_lock,in_ra,in_rb,in_is,in_p2,in_p3,in_p4,in_
 			out_p3 <= 0;
 			out_p4 <= 0;
 			out_control <= 0;
+			out_BPCOUT <= 0;
 			
 		end
 		else if (in_EN) begin
@@ -64,6 +68,7 @@ module EXMEM(in_EN,in_CLK,in_CLR,in_lock,in_ra,in_rb,in_is,in_p2,in_p3,in_p4,in_
 			out_p3 <= in_p3;
 			out_p4 <= in_p4;
 			out_control <= in_control;
+			out_BPCOUT <= in_BPCOUT;
 		end
 	end
 endmodule

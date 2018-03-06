@@ -24,27 +24,27 @@ module INTERRUPT(in_RST,in_IR,in_IG,in_INM,in_IE,out_code,out_break,out_leds);
 		IR <= 0;
 	end
 	always @(posedge in_IR[0] or posedge in_IG[0] or posedge in_RST) begin
-		if(in_IR[0])IR[0] <= 1;
+		if(in_RST)IR[0] <= 0;
 		else if(in_IG[0])IR[0] <= 0;
-		else if(in_RST)IR[0] <= 0;
+		else if(in_IR[0])IR[0] <= 1;
 	end
 
 	always @(posedge in_IR[1] or posedge in_IG[1] or posedge in_RST) begin
-		if(in_IR[1])IR[1] <= 1;
+		if(in_RST)IR[1] <= 0;
 		else if(in_IG[1])IR[1] <= 0;
-		else if(in_RST)IR[1] <= 0;
+		else if(in_IR[1])IR[1] <= 1;
 	end
 
 	always @(posedge in_IR[2] or posedge in_IG[2] or posedge in_RST) begin
-		if(in_IR[2])IR[2] <= 1;
+		if(in_RST)IR[2] <= 0;
 		else if(in_IG[2])IR[2] <= 0;
-		else if(in_RST)IR[2] <= 0;
+		else if(in_IR[2])IR[2] <= 1;
 	end
 
 	always @(posedge in_IR[3] or posedge in_IG[3] or posedge in_RST) begin
-		if(in_IR[3])IR[3] <= 1;
+		if(in_RST)IR[3] <= 0;
 		else if(in_IG[3])IR[3] <= 0;
-		else if(in_RST)IR[3] <= 0;
+		else if(in_IR[3])IR[3] <= 1;
 	end
 
 	always @(*) begin//优先编码

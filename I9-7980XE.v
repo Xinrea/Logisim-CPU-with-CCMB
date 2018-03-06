@@ -74,7 +74,8 @@ module I9_7980XE(clk,in_RST,pro_reset,in_addr,changef,in_IR,leds,SEG,AN);
 	wire NIE;
 	wire [31:0]EPC;
 	wire WB_eret;
-	REGFILE m_REGFILE(in_CLK,ID_syscall,in_RST,WB_regcontrol,WB_Memdata,WB_R,WB_PCOUT,WB_cp0,ID_cpw,BK,NIE,WB_PCOUT,WB_p2,WB_p4,ID_p4,ID_p3,ID_p2,ID_A,ID_B,IE,INM,EPC,WB_eret);
+	wire [31:0]WB_BPCOUT;
+	REGFILE m_REGFILE(in_CLK,ID_syscall,in_RST,WB_regcontrol,WB_Memdata,WB_R,WB_PCOUT,WB_cp0,ID_cpw,BK,NIE,WB_BPCOUT,WB_p2,WB_p4,ID_p4,ID_p3,ID_p2,ID_A,ID_B,IE,INM,EPC,WB_eret);
 
 
 	wire [25:0]ID_control;
@@ -114,7 +115,8 @@ module I9_7980XE(clk,in_RST,pro_reset,in_addr,changef,in_IR,leds,SEG,AN);
 	wire [31:0]MEM_is,MEM_pcout,MEM_ra,MEM_rb;
 	wire [4:0]MEM_p2,MEM_p3,MEM_p4;
 	wire [25:0]MEM_control;
-	EXMEM m_EXMEM(EN,in_CLK,R_EECLR,EX_lock,EX_A,EX_B2,EX_IS,EX_p2,EX_p3,EX_p4,EX_pcout,EX_control,EX_R,MEM_lock,MEM_ra,MEM_rb,MEM_is,MEM_p2,MEM_p3,MEM_p4,MEM_pcout,MEM_control,MEM_R);
+	wire [31:0]MEM_BPCOUT;
+	EXMEM m_EXMEM(EN,in_CLK,R_EECLR,EX_lock,EX_A,EX_B2,EX_IS,EX_p2,EX_p3,EX_p4,EX_pcout,EX_control,EX_R,PCOUT,MEM_lock,MEM_ra,MEM_rb,MEM_is,MEM_p2,MEM_p3,MEM_p4,MEM_pcout,MEM_control,MEM_R,MEM_BPCOUT);
 
 	reg [11:0]addr;
 	wire [1:0]mode;
@@ -137,7 +139,7 @@ module I9_7980XE(clk,in_RST,pro_reset,in_addr,changef,in_IR,leds,SEG,AN);
 	wire [4:0]WB_p3;
 	wire [25:0]WB_control;
 
-	MEMWB m_MEMWB(EN,in_CLK,in_RST,MEM_lock,MEM_ra,MEM_rb,MEM_is,MEM_p2,MEM_p3,MEM_p4,MEM_pcout,MEM_control,MEM_R,MEM_Memdata,WB_lock,WB_ra,WB_rb,WB_is,WB_p2,WB_p3,WB_p4,WB_PCOUT,WB_control,WB_R,WB_Memdata);
+	MEMWB m_MEMWB(EN,in_CLK,in_RST,MEM_lock,MEM_ra,MEM_rb,MEM_is,MEM_p2,MEM_p3,MEM_p4,MEM_pcout,MEM_control,MEM_R,MEM_Memdata,MEM_BPCOUT,WB_lock,WB_ra,WB_rb,WB_is,WB_p2,WB_p3,WB_p4,WB_PCOUT,WB_control,WB_R,WB_Memdata,WB_BPCOUT);
 	assign WB_regcontrol = WB_control[13:9];
 	assign WB_half = WB_control[16];
 	assign WB_Memwrite = WB_control[15];
