@@ -1,21 +1,25 @@
 //==================================================================================================
 //  Filename      : REGFILE.v
 //  Created On    : 2018-03-04 22:04:58
-//  Last Modified : 2018-03-06 14:34:57
+//  Last Modified : 2018-03-06 16:33:12
 //  Revision      : 
 //
 //  Description   : 
 //
 //
 //==================================================================================================
-module REGFILE(in_clk,in_syscall,in_regcontrol,in_Memdata,in_R,in_pcout,in_pc0,in_pcw,
-	in_p2,in_p4,in_id_p4,in_ra,in_rb,out_A,out_B,out_EPC);
-	input in_clk,in_syscall;
+module REGFILE(in_clk,in_syscall,in_RST,in_regcontrol,in_Memdata,in_R,in_pcout,in_pc0,in_pcw,in_BK,in_NIE,in_WB_PC,
+	in_p2,in_p4,in_id_p4,in_ra,in_rb,out_A,out_B,out_IE,out_INM);
+	input in_clk,in_syscall,in_RST;
 	input [4:0]in_regcontrol;
 	input [31:0]in_Memdata,in_R,in_pcout;
 	input in_pc0,in_pcw;
 	input [4:0]in_p2,in_p4,in_id_p4,in_ra,in_rb;
+	input in_BK,in_NIE;
+	input [31:0]in_WB_PC;
 	output [31:0]out_A,out_B;
+	output out_IE;
+	output [3:0]out_INM;
 	output [31:0]out_EPC;
 	reg [4:0]rW;
 	reg [4:0]rA,rB,rCP;
@@ -70,5 +74,5 @@ module REGFILE(in_clk,in_syscall,in_regcontrol,in_Memdata,in_R,in_pcout,in_pc0,i
 
 	end
 	BASEREGFILE m_BASEREGFILE(in_clk,in_regcontrol[2],rW,rA,rB,W,out_A,out_B);
-	REGCP0 m_REGPC0(in_clk,in_pcw,in_id_p4[1:0],out_A,rCP,out_CP,out_EPC);
+	REGCP0 m_REGPC0(in_RST,in_clk,in_pcw,in_id_p4[1:0],out_A,rCP,out_CP,out_IE,out_INM,in_BK,in_NIE,in_WB_PC,out_EPC);
 endmodule

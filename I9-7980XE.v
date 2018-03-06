@@ -1,18 +1,19 @@
 //==================================================================================================
 //  Filename      : I9-7980XE.v
 //  Created On    : 2018-03-05 13:39:32
-//  Last Modified : 2018-03-06 15:10:28
+//  Last Modified : 2018-03-06 16:36:13
 //  Revision      : 
 //
 //  Description   : 
 //
 //
 //==================================================================================================
-module I9_7980XE(clk,in_RST,pro_reset,in_addr,changef,leds,SEG,AN);
+module I9_7980XE(clk,in_RST,pro_reset,in_addr,changef,in_IR,leds,SEG,AN);
 	input clk,in_RST;
 	input [2:0]pro_reset;
 	input [11:0]in_addr;
     input changef;
+    input [3:0]in_IR;
 	output [15:0]leds;
 	output [7:0]SEG;
     output [7:0]AN;
@@ -65,10 +66,14 @@ module I9_7980XE(clk,in_RST,pro_reset,in_addr,changef,leds,SEG,AN);
 	DECODE m_DECODE(ID_IM,ID_IS,ID_p1,ID_imm,ID_p2,ID_p3,ID_p4);
 
 	wire [4:0]WB_regcontrol;
-	wire [31:0]WB_Memdata,WB_R,WB_PCOUT,ID_A,ID_B,ID_EPC;
+	wire [31:0]WB_Memdata,WB_R,WB_PCOUT,ID_A,ID_B;
 	wire [4:0]WB_p2,WB_p4;
+	wire IE;
+	wire [3:0]INM;
 	wire WB_cp0,WB_cpw;
-	REGFILE m_REGFILE(in_CLK,ID_syscall,WB_regcontrol,WB_Memdata,WB_R,WB_PCOUT,WB_cp0,ID_cpw,WB_p2,WB_p4,ID_p4,ID_p3,ID_p2,ID_A,ID_B,ID_EPC);
+	wire NIE;
+	wire [31:0]EPC;
+	REGFILE m_REGFILE(in_CLK,ID_syscall,in_RST,WB_regcontrol,WB_Memdata,WB_R,WB_PCOUT,WB_cp0,ID_cpw,WB_p2,WB_p4,ID_p4,ID_p3,ID_p2,ID_A,ID_B,IE,INM,NIE,WB_PCOUT,EPC);
 
 
 	wire [25:0]ID_control;
@@ -138,11 +143,6 @@ module I9_7980XE(clk,in_RST,pro_reset,in_addr,changef,leds,SEG,AN);
 	assign WB_cp0 = WB_control[23];
 	assign WB_cpw = WB_control[24];
 	assign WB_eret = WB_control[25];
-	assign FORCE = WB_eret;
-	assign FADDR = ID_EPC;
-	assign R_FDCLR = FORCE|FDCLR;
-	assign R_DECLR = FORCE|DECLR;
-	assign R_EECLR = FORCE|in_RST;
 	wire CLW;
 	always @(*) begin
 		if(CLW)WB_WB <= WB_Memdata;
@@ -150,7 +150,10 @@ module I9_7980XE(clk,in_RST,pro_reset,in_addr,changef,leds,SEG,AN);
 			WB_WB <= WB_R;
 		end
 	end
-
+	wire code;
+	wire [3:0]IG;
+	MINT m_MINT(in_CLK,in_RST,code,BK,WB_eret,EPC,FDCLR,DECLR,FORCE,FADDR,IG);
+	INTERRUPT m_INTERRUPT(in_RST,in_IR,IG,INM,IE,code,BK);
 	wire PEN;
 	REDIRECTION m_REDIRECTION(EN,in_CLK,in_RST,EX_J,JS,MEM_control[11],WB_control[11],ID_IS,EX_IS,MEM_is,WB_is,DECLR,FDCLR,BEN,PEN,ALUREDI,SYSREDI,CSW,CLW);
 endmodule
