@@ -22,14 +22,21 @@ module counter(in_EN,in_CLK,in_RST,in_J,in_JS,in_loaduse,out_total,out_J,out_JS,
         out_loaduse=0;
         flag=0;
     end
-
     always @(negedge in_CLK)begin
+        if(in_RST)begin 
+            out_loaduse=0;
+        end
+        else begin
+            if(in_loaduse)out_loaduse=out_loaduse+1;
+        end
+
+    end
+    always @(posedge in_CLK)begin
         if(in_RST)begin 
             flag=0;
             out_total=0;
             out_J=0;
             out_JS=0;
-            out_loaduse=0;
         end
         else begin
             if(in_EN)begin
@@ -42,7 +49,6 @@ module counter(in_EN,in_CLK,in_RST,in_J,in_JS,in_loaduse,out_total,out_J,out_JS,
             end
             if(in_J)out_J=out_J+1;
             if(in_JS)out_JS=out_JS+1;
-            if(in_loaduse)out_loaduse=out_loaduse+1;
         end
 
     end

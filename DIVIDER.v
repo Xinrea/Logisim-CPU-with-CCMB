@@ -23,7 +23,7 @@ initial
 
 always @(posedge clk_in) begin
 			if(changef) begin
-				if (cnt>=30)//actually 2500000 times
+				if (cnt>=2)//actually 5000000 times
 					begin
 						clk_out <= ~clk_out;
 						cnt <= 0;
@@ -34,7 +34,7 @@ always @(posedge clk_in) begin
 					end
 			end
 			else begin
-				if (cnt>=2500000)//actually 2500000 times
+				if (cnt>=2500000)//2500000
 					begin
 						clk_out <= ~clk_out;
 						cnt <= 0;

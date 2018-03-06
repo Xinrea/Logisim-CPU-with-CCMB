@@ -17,7 +17,7 @@ module display(clk,data_to_show,SEG,AN);
     reg [2:0]pos;
     reg clk_down = 0;
     reg [31:0] cnt = 0;
-    parameter times = 2;//·ÖÊ±Îª25hz
+    parameter times = 40000;//·ÖÊ±Îª25hz
     initial begin
         pos=0;
         SEG=8'b00000000;
