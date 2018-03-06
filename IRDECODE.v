@@ -10,13 +10,16 @@
 //==================================================================================================
 module IRDECODE(in_code,out_addr);
 	input [1:0]in_code;
-	output reg out_addr;
-	alwasy @(*) begin
+	output reg [31:0]out_addr;
+	initial begin
+		out_addr = 0;
+	end
+	always @(*) begin
 		case(in_code)//generate interrupt processing addr
-			2'b00:out_addr <= 4'h0000;
-			2'b01:out_addr <= 4'h0000;
-			2'b10:out_addr <= 4'h0000;
-			2'b11:out_addr <= 4'h0000;
+			2'b00:out_addr <= 32'h00DB;
+			2'b01:out_addr <= 32'h010F;
+			2'b10:out_addr <= 32'h0143;
+			2'b11:out_addr <= 32'h0177;
 		endcase
 	end
 endmodule

@@ -73,7 +73,8 @@ module I9_7980XE(clk,in_RST,pro_reset,in_addr,changef,in_IR,leds,SEG,AN);
 	wire WB_cp0,WB_cpw;
 	wire NIE;
 	wire [31:0]EPC;
-	REGFILE m_REGFILE(in_CLK,ID_syscall,in_RST,WB_regcontrol,WB_Memdata,WB_R,WB_PCOUT,WB_cp0,ID_cpw,WB_p2,WB_p4,ID_p4,ID_p3,ID_p2,ID_A,ID_B,IE,INM,NIE,WB_PCOUT,EPC);
+	wire WB_eret;
+	REGFILE m_REGFILE(in_CLK,ID_syscall,in_RST,WB_regcontrol,WB_Memdata,WB_R,WB_PCOUT,WB_cp0,ID_cpw,BK,NIE,WB_PCOUT,WB_p2,WB_p4,ID_p4,ID_p3,ID_p2,ID_A,ID_B,IE,INM,EPC,WB_eret);
 
 
 	wire [25:0]ID_control;
@@ -135,7 +136,7 @@ module I9_7980XE(clk,in_RST,pro_reset,in_addr,changef,in_IR,leds,SEG,AN);
 	wire [31:0]WB_is,WB_ra;
 	wire [4:0]WB_p3;
 	wire [25:0]WB_control;
-	wire WB_eret;
+
 	MEMWB m_MEMWB(EN,in_CLK,in_RST,MEM_lock,MEM_ra,MEM_rb,MEM_is,MEM_p2,MEM_p3,MEM_p4,MEM_pcout,MEM_control,MEM_R,MEM_Memdata,WB_lock,WB_ra,WB_rb,WB_is,WB_p2,WB_p3,WB_p4,WB_PCOUT,WB_control,WB_R,WB_Memdata);
 	assign WB_regcontrol = WB_control[13:9];
 	assign WB_half = WB_control[16];
@@ -150,10 +151,10 @@ module I9_7980XE(clk,in_RST,pro_reset,in_addr,changef,in_IR,leds,SEG,AN);
 			WB_WB <= WB_R;
 		end
 	end
-	wire code;
+	wire [1:0]code;
 	wire [3:0]IG;
-	MINT m_MINT(in_CLK,in_RST,code,BK,WB_eret,EPC,FDCLR,DECLR,FORCE,FADDR,IG);
-	INTERRUPT m_INTERRUPT(in_RST,in_IR,IG,INM,IE,code,BK);
+	MINT m_MINT(in_CLK,in_RST,code,BK,WB_eret,EPC,FDCLR,DECLR,R_FDCLR,R_DECLR,R_EECLR,FORCE,FADDR,IG,NIE);
+	INTERRUPT m_INTERRUPT(in_RST,in_IR,IG,INM,IE,code,BK,leds[2:0]);
 	wire PEN;
 	REDIRECTION m_REDIRECTION(EN,in_CLK,in_RST,EX_J,JS,MEM_control[11],WB_control[11],ID_IS,EX_IS,MEM_is,WB_is,DECLR,FDCLR,BEN,PEN,ALUREDI,SYSREDI,CSW,CLW);
 endmodule

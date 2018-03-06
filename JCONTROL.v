@@ -14,7 +14,7 @@ module JCONTROL(in_instruction,in_special,
 	input in_special;
 	output reg out_J,out_JW,out_JR,out_BEQ,out_BNE,out_BGEZ,out_MemWrite,out_half;
 	always @(*) begin
-		if(~in_special&(in_instruction==0'h10))begin
+		if(~in_special&(in_instruction==8'h10))begin
 			out_J <= 0;
 			out_JW <= 0;
 			out_JR <= 0;

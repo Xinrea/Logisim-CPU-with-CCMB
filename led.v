@@ -31,8 +31,6 @@ output [15:0]leds;  //16Î»µÄledµÆµÄÏÔÊ¾
 
 assign leds[15]=reset;  //ÖØÖÃÖ¸Ê¾µÆ,×î×ó±ß
 
-assign leds[2:0]=pro_reset;   //ÏÔÊ¾¸÷ÖÖ²ÎÊýµÄµÄledµÆ
-
 assign leds[14:3]=in_addr;  //ÏÔÊ¾µØÖ·ÖµµÄledµÆ
 
 endmodule

@@ -9,7 +9,7 @@
 //
 //==================================================================================================
 module REGFILE(in_clk,in_syscall,in_RST,in_regcontrol,in_Memdata,in_R,in_pcout,in_pc0,in_pcw,in_BK,in_NIE,in_WB_PC,
-	in_p2,in_p4,in_id_p4,in_ra,in_rb,out_A,out_B,out_IE,out_INM);
+	in_p2,in_p4,in_id_p4,in_ra,in_rb,out_A,out_B,out_IE,out_INM,out_EPC,in_eret);
 	input in_clk,in_syscall,in_RST;
 	input [4:0]in_regcontrol;
 	input [31:0]in_Memdata,in_R,in_pcout;
@@ -17,6 +17,7 @@ module REGFILE(in_clk,in_syscall,in_RST,in_regcontrol,in_Memdata,in_R,in_pcout,i
 	input [4:0]in_p2,in_p4,in_id_p4,in_ra,in_rb;
 	input in_BK,in_NIE;
 	input [31:0]in_WB_PC;
+	input in_eret;
 	output [31:0]out_A,out_B;
 	output out_IE;
 	output [3:0]out_INM;
@@ -74,5 +75,5 @@ module REGFILE(in_clk,in_syscall,in_RST,in_regcontrol,in_Memdata,in_R,in_pcout,i
 
 	end
 	BASEREGFILE m_BASEREGFILE(in_clk,in_regcontrol[2],rW,rA,rB,W,out_A,out_B);
-	REGCP0 m_REGPC0(in_RST,in_clk,in_pcw,in_id_p4[1:0],out_A,rCP,out_CP,out_IE,out_INM,in_BK,in_NIE,in_WB_PC,out_EPC);
+	REGCP0 m_REGPC0(in_RST,in_clk,in_pcw,in_id_p4[1:0],out_A,rCP[1:0],out_CP,out_IE,out_INM,in_BK,in_NIE,in_WB_PC,out_EPC,in_eret);
 endmodule

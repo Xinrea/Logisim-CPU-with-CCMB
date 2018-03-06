@@ -11,7 +11,7 @@
 module ARCONTROL(in_special,in_func,in_cp0,out_IM,out_alumode,out_aluin_,out_regcontrol,out_syscall,out_cp0,out_cpw,out_eret);
     input in_special;
     input [5:0]in_func;
-    input [5:0]in_cp0;
+    input [4:0]in_cp0;
     output reg out_IM = 0;
     output reg [3:0]out_alumode = 0;
     output reg [3:0]out_aluin_ = 0;
@@ -37,7 +37,7 @@ module ARCONTROL(in_special,in_func,in_cp0,out_IM,out_alumode,out_aluin_,out_reg
                     out_regcontrol <= 5'b01101;
                     out_syscall <= 0;
                     out_cp0 <= 0;
-                    out_cpw <0;
+                    out_cpw <=0;
                     out_eret <= 0;
                 end
                 6'b100001:begin//addu#
@@ -47,7 +47,7 @@ module ARCONTROL(in_special,in_func,in_cp0,out_IM,out_alumode,out_aluin_,out_reg
                     out_regcontrol <= 5'b01101;
                     out_syscall <= 0;
                     out_cp0 <= 0;
-                    out_cpw <0;
+                    out_cpw <=0;
                     out_eret <= 0;
                 end
                 6'b100100:begin//and#
@@ -57,7 +57,7 @@ module ARCONTROL(in_special,in_func,in_cp0,out_IM,out_alumode,out_aluin_,out_reg
                     out_regcontrol <= 5'b01101;
                     out_syscall <= 0;
                     out_cp0 <= 0;
-                    out_cpw <0;
+                    out_cpw <=0;
                     out_eret <= 0;
                 end
                 6'b100111:begin//nor#
@@ -67,7 +67,7 @@ module ARCONTROL(in_special,in_func,in_cp0,out_IM,out_alumode,out_aluin_,out_reg
                     out_regcontrol <= 5'b01101;
                     out_syscall <= 0;
                     out_cp0 <= 0;
-                    out_cpw <0;
+                    out_cpw <=0;
                     out_eret <= 0;
                 end
                 6'b100101:begin//or#
@@ -77,7 +77,7 @@ module ARCONTROL(in_special,in_func,in_cp0,out_IM,out_alumode,out_aluin_,out_reg
                     out_regcontrol <= 5'b01101;
                     out_syscall <= 0;
                     out_cp0 <= 0;
-                    out_cpw <0;
+                    out_cpw <=0;
                     out_eret <= 0;
                 end
                 6'b000000:begin//sll
@@ -87,7 +87,7 @@ module ARCONTROL(in_special,in_func,in_cp0,out_IM,out_alumode,out_aluin_,out_reg
                     out_syscall <= 0;
                     out_IM <= 0;
                     out_cp0 <= 0;
-                    out_cpw <0;
+                    out_cpw <=0;
                     out_eret <= 0;
                 end
                 6'b000011:begin//sra
@@ -97,7 +97,7 @@ module ARCONTROL(in_special,in_func,in_cp0,out_IM,out_alumode,out_aluin_,out_reg
                     out_syscall <= 0;
                     out_IM <= 0;
                     out_cp0 <= 0;
-                    out_cpw <0;
+                    out_cpw <=0;
                     out_eret <= 0;
                 end
                 6'b000010:begin//srl
@@ -107,7 +107,7 @@ module ARCONTROL(in_special,in_func,in_cp0,out_IM,out_alumode,out_aluin_,out_reg
                     out_syscall <= 0;
                     out_IM <= 0;
                     out_cp0 <= 0;
-                    out_cpw <0;
+                    out_cpw <=0;
                     out_eret <= 0;
                 end
                 6'b100010:begin//sub#
@@ -117,7 +117,7 @@ module ARCONTROL(in_special,in_func,in_cp0,out_IM,out_alumode,out_aluin_,out_reg
                     out_syscall <= 0;
                     out_IM <= 0;
                     out_cp0 <= 0;
-                    out_cpw <0;
+                    out_cpw <=0;
                     out_eret <= 0;
                 end
                 6'b001000:begin//jr
@@ -127,7 +127,7 @@ module ARCONTROL(in_special,in_func,in_cp0,out_IM,out_alumode,out_aluin_,out_reg
                     out_syscall <= 0;
                     out_IM <= 0;
                     out_cp0 <= 0;
-                    out_cpw <0;
+                    out_cpw <=0;
                     out_eret <= 0;
                 end
                 6'b001100:begin//syscall
@@ -137,7 +137,7 @@ module ARCONTROL(in_special,in_func,in_cp0,out_IM,out_alumode,out_aluin_,out_reg
                     out_syscall <= 1;
                     out_IM <= 0;
                     out_cp0 <= 0;
-                    out_cpw <0;
+                    out_cpw <=0;
                     out_eret <= 0;
                 end
                 6'b101010:begin//slt#
@@ -147,7 +147,7 @@ module ARCONTROL(in_special,in_func,in_cp0,out_IM,out_alumode,out_aluin_,out_reg
                     out_syscall <= 0;
                     out_IM <= 0;
                     out_cp0 <= 0;
-                    out_cpw <0;
+                    out_cpw <=0;
                     out_eret <= 0;
                 end
                 6'b101011:begin//sltu
@@ -157,7 +157,7 @@ module ARCONTROL(in_special,in_func,in_cp0,out_IM,out_alumode,out_aluin_,out_reg
                     out_syscall <= 0;
                     out_IM <= 0;
                     out_cp0 <= 0;
-                    out_cpw <0;
+                    out_cpw <=0;
                     out_eret <= 0;
                 end
                 6'b000110:begin//srlv#
@@ -167,7 +167,7 @@ module ARCONTROL(in_special,in_func,in_cp0,out_IM,out_alumode,out_aluin_,out_reg
                     out_syscall <= 0;
                     out_IM <= 0;
                     out_cp0 <= 0;
-                    out_cpw <0;
+                    out_cpw <=0;
                     out_eret <= 0;
                 end
                 6'b100110:begin//xor#
@@ -177,7 +177,7 @@ module ARCONTROL(in_special,in_func,in_cp0,out_IM,out_alumode,out_aluin_,out_reg
                     out_syscall <= 0;
                     out_IM <= 0;
                     out_cp0 <= 0;
-                    out_cpw <0;
+                    out_cpw <=0;
                     out_eret <= 0;
                 end
             endcase
@@ -191,7 +191,7 @@ module ARCONTROL(in_special,in_func,in_cp0,out_IM,out_alumode,out_aluin_,out_reg
                     out_syscall <= 0;
                     out_IM <= 1;
                     out_cp0 <= 0;
-                    out_cpw <0;
+                    out_cpw <=0;
                     out_eret <= 0;
                 end
                 6'b001001:begin//addiu#
@@ -201,7 +201,7 @@ module ARCONTROL(in_special,in_func,in_cp0,out_IM,out_alumode,out_aluin_,out_reg
                     out_syscall <= 0;
                     out_IM <= 0;
                     out_cp0 <= 0;
-                    out_cpw <0;
+                    out_cpw <=0;
                     out_eret <= 0;
                 end
                 6'b001100:begin//andi#
@@ -211,7 +211,7 @@ module ARCONTROL(in_special,in_func,in_cp0,out_IM,out_alumode,out_aluin_,out_reg
                     out_syscall <= 0;
                     out_IM <= 0;
                     out_cp0 <= 0;
-                    out_cpw <0;
+                    out_cpw <=0;
                     out_eret <= 0;
                 end
                 6'b001101:begin//ori#
@@ -221,7 +221,7 @@ module ARCONTROL(in_special,in_func,in_cp0,out_IM,out_alumode,out_aluin_,out_reg
                     out_syscall <= 0;
                     out_IM <= 0;
                     out_cp0 <= 0;
-                    out_cpw <0;
+                    out_cpw <=0;
                     out_eret <= 0;
                 end
                 6'b000100:begin//beq#
@@ -231,7 +231,7 @@ module ARCONTROL(in_special,in_func,in_cp0,out_IM,out_alumode,out_aluin_,out_reg
                     out_syscall <= 0;
                     out_IM <= 1;
                     out_cp0 <= 0;
-                    out_cpw <0;
+                    out_cpw <=0;
                     out_eret <= 0;
                 end
                 6'b000101:begin//bne#
@@ -241,7 +241,7 @@ module ARCONTROL(in_special,in_func,in_cp0,out_IM,out_alumode,out_aluin_,out_reg
                     out_syscall <= 0;
                     out_IM <= 1;
                     out_cp0 <= 0;
-                    out_cpw <0;
+                    out_cpw <=0;
                     out_eret <= 0;
                 end
                 6'b000010:begin//j#
@@ -251,7 +251,7 @@ module ARCONTROL(in_special,in_func,in_cp0,out_IM,out_alumode,out_aluin_,out_reg
                     out_syscall <= 0;
                     out_IM <= 0;
                     out_cp0 <= 0;
-                    out_cpw <0;
+                    out_cpw <=0;
                     out_eret <= 0;
                 end
                 6'b000011:begin//jal#
@@ -261,7 +261,7 @@ module ARCONTROL(in_special,in_func,in_cp0,out_IM,out_alumode,out_aluin_,out_reg
                     out_syscall <= 0;
                     out_IM <= 0;
                     out_cp0 <= 0;
-                    out_cpw <0;
+                    out_cpw <=0;
                     out_eret <= 0;
                 end
                 6'b100011:begin//lw#
@@ -271,7 +271,7 @@ module ARCONTROL(in_special,in_func,in_cp0,out_IM,out_alumode,out_aluin_,out_reg
                     out_syscall <= 0;
                     out_IM <= 1;
                     out_cp0 <= 0;
-                    out_cpw <0;
+                    out_cpw <=0;
                     out_eret <= 0;
                 end
                 6'b101011:begin//sw#
@@ -281,7 +281,7 @@ module ARCONTROL(in_special,in_func,in_cp0,out_IM,out_alumode,out_aluin_,out_reg
                     out_syscall <= 0;
                     out_IM <= 1;
                     out_cp0 <= 0;
-                    out_cpw <0;
+                    out_cpw <=0;
                     out_eret <= 0;
                 end
                 6'b001010:begin//slti#
@@ -291,7 +291,7 @@ module ARCONTROL(in_special,in_func,in_cp0,out_IM,out_alumode,out_aluin_,out_reg
                     out_syscall <= 0;
                     out_IM <= 1;
                     out_cp0 <= 0;
-                    out_cpw <0;
+                    out_cpw <=0;
                     out_eret <= 0;
                 end
                 6'b100101:begin//lhu#
@@ -301,7 +301,7 @@ module ARCONTROL(in_special,in_func,in_cp0,out_IM,out_alumode,out_aluin_,out_reg
                     out_syscall <= 0;
                     out_IM <= 1;
                     out_cp0 <= 0;
-                    out_cpw <0;
+                    out_cpw <=0;
                     out_eret <= 0;
                 end
                 6'b000001:begin//bgez
@@ -311,7 +311,7 @@ module ARCONTROL(in_special,in_func,in_cp0,out_IM,out_alumode,out_aluin_,out_reg
                     out_syscall <= 0;
                     out_IM <= 1;
                     out_cp0 <= 0;
-                    out_cpw <0;
+                    out_cpw <=0;
                     out_eret <= 0;
                 end
                 6'b010000:begin
@@ -322,7 +322,7 @@ module ARCONTROL(in_special,in_func,in_cp0,out_IM,out_alumode,out_aluin_,out_reg
                         out_syscall <= 0;
                         out_IM <= 0;
                         out_cp0 <= 1;
-                        out_cpw <0;
+                        out_cpw <=0;
                         out_eret <= 0;
                     end
                     else if(in_cp0==5'b00100) begin//mtc0

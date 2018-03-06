@@ -29,5 +29,5 @@ module CONTROL(in_is,out_J,out_JW,out_JR,out_BEQ,out_BNE,out_BGEZ,
 		end
 	end
 	JCONTROL m_JCONTROL(instruction,special,out_J,out_JW,out_JR,out_BEQ,out_BNE,out_BGEZ,out_MemWrite,out_half);
-	ARCONTROL m_ARCONTROL(special,instruction,in_is[25:21],out_IM,out_ALUmode,out_ALUinput,out_RegControl,out_syscall,out_cp0,out_cpw);
+	ARCONTROL m_ARCONTROL(special,instruction,in_is[25:21],out_IM,out_ALUmode,out_ALUinput,out_RegControl,out_syscall,out_cp0,out_cpw,out_eret);
 endmodule
