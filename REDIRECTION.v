@@ -17,7 +17,11 @@ module REDIRECTION(in_EN,in_CLK,in_RST,in_J,in_JS,in_PPWE,in_PPPWE,in_IS,in_PIS,
 	output [3:0]out_SYSREDI;
 	output reg [1:0]out_CSW;
 	output out_CLW;
-	
+	initial begin
+		out_DECLR <= 0;
+		out_FDCLR <= 0;
+		out_BEN <= 1;
+	end
 	wire [5:0]FUNCT;
 	wire [4:0]RD;
 	wire [4:0]RT;

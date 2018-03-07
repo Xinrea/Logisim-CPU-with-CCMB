@@ -13,8 +13,7 @@ module testbench();
 	reg [2:0]pro_reset;
 	reg [11:0]in_addr;
 	reg changef;
-	reg [3:0]in_IR;
-	wire [15:0]leds;
+	wire [2:0]leds;
 	wire[7:0]SEG;
 	wire [7:0]AN;
 
@@ -24,17 +23,19 @@ module testbench();
 		pro_reset = 0;
 		in_addr = 0;
 		changef = 1;
-		in_IR = 0;
 
 		$monitor("At time %t, ocnt = %d", $time, clk);
 		$dumpfile("counter_test.vcd");
 		$dumpvars(0, m_I9);
 
-		#2000 in_IR[0] = 1;
+		#5000 pro_reset[0] = 1;
+		#1000 pro_reset[0] = 0;
+		#10000 pro_reset[1] = 1;
+		#1000 pro_reset[1] = 0;
 	end
 
 	always #5 clk = ~clk;
 
 
-	I9_7980XE m_I9(clk,rst,pro_reset,in_addr,changef,in_IR,leds,SEG,AN);
+	I9_7980XE m_I9(clk,rst,pro_reset,in_addr,changef,leds,SEG,AN);
 endmodule

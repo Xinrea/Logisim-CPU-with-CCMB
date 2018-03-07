@@ -340,8 +340,8 @@ jmp_count: addi $s0,$zero, 0
        
        jr $31
 int_program1:
-sw $sp,0x00001000($zero)
-addiu $sp,$zero,0x00001000 #初始化栈指针
+sw $sp,0x00000100($zero)
+addiu $sp,$zero,0x00000100 #初始化栈指针
 
 addiu $sp,$sp,-4 #保存现场
 sw $s1,0($sp)
@@ -421,8 +421,8 @@ lw $sp,0($sp)
 eret #返回
 
 int_program2:
-sw $sp,0x00001000($zero)
-addiu $sp,$zero,0x00001000 #初始化栈指针
+sw $sp,0x00000100($zero)
+addiu $sp,$zero,0x00000100 #初始化栈指针
 
 addiu $sp,$sp,-4 #保存现场
 sw $s1,0($sp)
@@ -501,8 +501,8 @@ lw $sp,0($sp)
 eret #返回
 
 int_program3:
-sw $sp,0x00001000($zero)
-addiu $sp,$zero,0x00001000 #初始化栈指针
+sw $sp,0x00000100($zero)
+addiu $sp,$zero,0x00000100 #初始化栈指针
 
 addiu $sp,$sp,-4 #保存现场
 sw $s1,0($sp)
@@ -581,8 +581,8 @@ lw $sp,0($sp)
 eret #返回
 
 int_program4:
-sw $sp,0x00001000($zero)
-addiu $sp,$zero,0x00001000 #初始化栈指针
+sw $sp,0x00000100($zero)
+addiu $sp,$zero,0x00000100 #初始化栈指针
 
 addiu $sp,$sp,-4 #保存现场
 sw $s1,0($sp)

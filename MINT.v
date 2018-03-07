@@ -21,8 +21,11 @@ module MINT(in_CLK,in_RST,in_code,in_BK,in_eret,in_EPC,in_FDCLR,in_DECLR,R_FDCLR
 	output reg out_NIE;
 	reg [1:0]rcode;
 	wire [31:0]int_addr;
+	initial out_IG <= 0;
 
 	always @(in_CLK or in_FDCLR or in_DECLR or in_RST) begin
+//	always @(posedge in_CLK or posedge in_BK or posedge in_eret or posedge in_FDCLR or posedge in_DECLR or posedge in_RST) begin
+//	always @(*) begin
 		if(in_BK)begin
 			out_NIE <= 0;//		
 			R_FDCLR <= 1;
@@ -30,6 +33,7 @@ module MINT(in_CLK,in_RST,in_code,in_BK,in_eret,in_EPC,in_FDCLR,in_DECLR,R_FDCLR
 			R_EECLR <= 1;
 			out_force <= 1;
 			out_pc <= int_addr;
+			out_IG <= 0;
 		end
 		else begin
 			if(in_eret)begin
@@ -40,10 +44,10 @@ module MINT(in_CLK,in_RST,in_code,in_BK,in_eret,in_EPC,in_FDCLR,in_DECLR,R_FDCLR
 				R_DECLR <= 1;
 				R_EECLR <= 1;
 				case(rcode)
-					2'b00:out_IG <= 4'b0001;
-					2'b01:out_IG <= 4'b0010;
-					2'b10:out_IG <= 4'b0100;
-					2'b11:out_IG <= 4'b1000;
+					2'b00:out_IG <= 4'b0000;
+					2'b01:out_IG <= 4'b0001;
+					2'b10:out_IG <= 4'b0010;
+					2'b11:out_IG <= 4'b0100;
 				endcase
 			end
 			else begin

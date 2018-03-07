@@ -8,7 +8,7 @@
 //
 //
 //==================================================================================================
-module REGCP0(in_RST,in_CLK,WE,rW,W,rA,A,out_IE,out_INM,in_BK,in_NIE,in_WB_PC,out_EPC,in_eret);
+module REGCP0(in_RST,in_CLK,WE,rW,W,rA,A,out_IE,out_INM,in_BK,in_NIE,in_WB_PC,out_EPC,in_eret,in_code);
 
 	input in_CLK,in_RST;
 	input WE;
@@ -18,10 +18,13 @@ module REGCP0(in_RST,in_CLK,WE,rW,W,rA,A,out_IE,out_INM,in_BK,in_NIE,in_WB_PC,ou
 	input in_BK,in_NIE;
 	input [31:0]in_WB_PC;
 	input in_eret;
+	input [1:0]in_code;
 	output [31:0]A;
 	output out_IE;
 	output [3:0]out_INM;
 	output [31:0]out_EPC;
+	wire rcode;
+	assign rcode = in_code[0]|in_code[1];
 	// 0 for IE
 	// 1 for INM
 	// 2 for EPC
@@ -37,12 +40,10 @@ module REGCP0(in_RST,in_CLK,WE,rW,W,rA,A,out_IE,out_INM,in_BK,in_NIE,in_WB_PC,ou
 		if(in_RST)begin
 			CP0[0] <= 1;
 			CP0[1] <= 0;
-			CP0[2] <= 0;
 		end
 		else if(in_BK) begin
 			CP0[0][0] <= in_NIE;
 			CP0[0][31:1] <= 0;
-			CP0[2] <= in_WB_PC + 1;
 		end
 		else begin
 			if(in_eret)begin
@@ -53,6 +54,12 @@ module REGCP0(in_RST,in_CLK,WE,rW,W,rA,A,out_IE,out_INM,in_BK,in_NIE,in_WB_PC,ou
 				CP0[rW] <= W;
 			end
 		end
+	end
+
+
+	always @(posedge rcode) begin
+		if(in_RST)CP0[2] <= 0;
+		else CP0[2] <= in_WB_PC;
 	end
 
 	assign A = CP0[rA];

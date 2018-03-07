@@ -8,13 +8,12 @@
 //
 //
 //==================================================================================================
-module I9_7980XE(clk,in_RST,pro_reset,in_addr,changef,in_IR,leds,SEG,AN);
+module I9_7980XE(clk,in_RST,pro_reset,in_addr,changef,leds,SEG,AN);
 	input clk,in_RST;
 	input [2:0]pro_reset;
 	input [11:0]in_addr;
     input changef;
-    input [3:0]in_IR;
-	output [15:0]leds;
+	output [2:0]leds;
 	output [7:0]SEG;
     output [7:0]AN;
     wire new_CLK;
@@ -34,9 +33,9 @@ module I9_7980XE(clk,in_RST,pro_reset,in_addr,changef,in_IR,leds,SEG,AN);
 	wire [31:0]EX_R,EX_syscallout,EX_B2;
 	wire [3:0]ALUREDI,SYSREDI;
 	wire R_FDCLR,R_DECLR,R_EECLR;
-    led m_led(in_RST,pro_reset,in_addr,leds);
+//    led m_led(in_RST,pro_reset,in_addr,leds[15:4]);
     counter m_counter(EN,in_CLK,in_RST,EX_J,JS,loaduse,ctotal,cJ,cJS,cloaduse);
-    change_type m_changetype(in_CLK,EX_syscallout,extra_data,PCOUT,ctotal,cJ,cloaduse,cJS,pro_reset,datatoshow);
+    change_type m_changetype(in_CLK,EX_syscallout,extra_data,PCOUT,ctotal,cJ,cloaduse,cJS,datatoshow);
     display m_display(clk,datatoshow,SEG,AN);
 
     always @(*) begin
@@ -74,8 +73,9 @@ module I9_7980XE(clk,in_RST,pro_reset,in_addr,changef,in_IR,leds,SEG,AN);
 	wire NIE;
 	wire [31:0]EPC;
 	wire WB_eret;
+	wire [1:0]code;
 	wire [31:0]WB_BPCOUT;
-	REGFILE m_REGFILE(in_CLK,ID_syscall,in_RST,WB_regcontrol,WB_Memdata,WB_R,WB_PCOUT,WB_cp0,ID_cpw,BK,NIE,WB_BPCOUT,WB_p2,WB_p4,ID_p4,ID_p3,ID_p2,ID_A,ID_B,IE,INM,EPC,WB_eret);
+	REGFILE m_REGFILE(in_CLK,ID_syscall,in_RST,WB_regcontrol,WB_Memdata,WB_R,WB_PCOUT,WB_cp0,ID_cpw,BK,NIE,WB_BPCOUT,WB_p2,WB_p4,ID_p4,ID_p3,ID_p2,ID_A,ID_B,IE,INM,EPC,WB_eret,code);
 
 
 	wire [25:0]ID_control;
@@ -153,10 +153,9 @@ module I9_7980XE(clk,in_RST,pro_reset,in_addr,changef,in_IR,leds,SEG,AN);
 			WB_WB <= WB_R;
 		end
 	end
-	wire [1:0]code;
 	wire [3:0]IG;
-	MINT m_MINT(in_CLK,in_RST,code,BK,WB_eret,EPC,FDCLR,DECLR,R_FDCLR,R_DECLR,R_EECLR,FORCE,FADDR,IG,NIE);
-	INTERRUPT m_INTERRUPT(in_RST,in_IR,IG,INM,IE,code,BK,leds[2:0]);
+	MINT m_MINT(clk,in_RST,code,BK,WB_eret,EPC,FDCLR,DECLR,R_FDCLR,R_DECLR,R_EECLR,FORCE,FADDR,IG,NIE);
+	INTERRUPT m_INTERRUPT(in_RST,clk,pro_reset,IG,INM,IE,code,BK,leds);
 	wire PEN;
 	REDIRECTION m_REDIRECTION(EN,in_CLK,in_RST,EX_J,JS,MEM_control[11],WB_control[11],ID_IS,EX_IS,MEM_is,WB_is,DECLR,FDCLR,BEN,PEN,ALUREDI,SYSREDI,CSW,CLW);
 endmodule
