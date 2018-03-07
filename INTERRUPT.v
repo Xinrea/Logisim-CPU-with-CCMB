@@ -23,24 +23,24 @@ module INTERRUPT(in_RST,in_CLK,in_IR,in_IG,in_INM,in_IE,out_code,out_break,IR);
 	end
 
 	always @(posedge in_CLK) begin
-		rIR <= in_IR;
+		rIR = in_IR;
 	end
 	always @(posedge rIR[0] or posedge in_RST or posedge in_IG[0]) begin
-		if(in_RST)IR[0] <= 0;
-		else if(in_IG[0])IR[0] <= 0;
-		else if(rIR[0])IR[0] <= 1;
+		if(in_RST)IR[0] = 0;
+		else if(in_IG[0])IR[0] = 0;
+		else IR[0] = 1;
 	end
 
 	always @(posedge rIR[1] or posedge in_RST or posedge in_IG[1]) begin
-		if(in_RST)IR[1] <= 0;
-		else if(in_IG[1])IR[1] <= 0;
-		else if(rIR[1])IR[1] <= 1;
+		if(in_RST)IR[1] = 0;
+		else if(in_IG[1])IR[1] = 0;
+		else IR[1] = 1;
 	end
 
 	always @(posedge rIR[2] or posedge in_RST or posedge in_IG[2]) begin
-		if(in_RST)IR[2] <= 0;
-		else if(in_IG[2])IR[2] <= 0;
-		else if(rIR[2])IR[2] <= 1;
+		if(in_RST)IR[2] = 0;
+		else if(in_IG[2])IR[2] = 0;
+		else IR[2] = 1;
 	end
 
 	// always @(posedge in_IR[3] or posedge in_RST or posedge in_IG[3]) begin
