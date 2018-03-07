@@ -23,7 +23,7 @@ module MINT(in_CLK,in_RST,in_code,in_BK,in_eret,in_EPC,in_FDCLR,in_DECLR,R_FDCLR
 	wire [31:0]int_addr;
 	initial out_IG <= 0;
 
-	always @(in_CLK or in_FDCLR or in_DECLR or in_RST) begin
+	always @(posedge in_CLK) begin
 //	always @(posedge in_CLK or posedge in_BK or posedge in_eret or posedge in_FDCLR or posedge in_DECLR or posedge in_RST) begin
 //	always @(*) begin
 		if(in_BK)begin
