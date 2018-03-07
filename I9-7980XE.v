@@ -1,7 +1,7 @@
 //==================================================================================================
 //  Filename      : I9-7980XE.v
 //  Created On    : 2018-03-05 13:39:32
-//  Last Modified : 2018-03-07 23:39:15
+//  Last Modified : 2018-03-08 01:51:59
 //  Revision      : 
 //
 //  Description   : 
@@ -72,12 +72,12 @@ module I9_7980XE(clk,in_RST,pro_reset,in_addr,changef,leds,SEG,AN);
 	wire WB_cp0,WB_cpw;
 	wire NIE;
 	wire [31:0]EPC;
-	wire WB_eret;
+	reg WB_eret;
 	wire [1:0]code;
 	wire [31:0]WB_BPCOUT;
 	wire [31:0]EX_pcout,MEM_pcout;
 	wire [31:0]WB_is;
-	REGFILE m_REGFILE(in_CLK,ID_syscall,in_RST,WB_regcontrol,WB_Memdata,WB_R,WB_PCOUT,WB_cp0,ID_cpw,BK,NIE,WB_BPCOUT,WB_p2,WB_p4,ID_p4,ID_p3,ID_p2,ID_A,ID_B,IE,INM,EPC,WB_eret,code,EX_pcout,MEM_pcout,WB_is,ID_PCOUT);
+	REGFILE m_REGFILE(in_CLK,ID_syscall,in_RST,WB_regcontrol,WB_Memdata,WB_R,WB_PCOUT,WB_cp0,WB_cpw,BK,NIE,WB_BPCOUT,WB_p2,WB_p4,ID_p4,ID_p3,ID_p2,ID_A,ID_B,IE,INM,EPC,WB_eret,code,EX_pcout,MEM_pcout,WB_is,ID_PCOUT);
 
 
 	wire [25:0]ID_control;
@@ -147,7 +147,6 @@ module I9_7980XE(clk,in_RST,pro_reset,in_addr,changef,leds,SEG,AN);
 	assign WB_Memwrite = WB_control[15];
 	assign WB_cp0 = WB_control[23];
 	assign WB_cpw = WB_control[24];
-	assign WB_eret = WB_control[25];
 	wire CLW;
 	always @(*) begin
 		if(CLW)WB_WB <= WB_Memdata;
@@ -155,6 +154,18 @@ module I9_7980XE(clk,in_RST,pro_reset,in_addr,changef,leds,SEG,AN);
 			WB_WB <= WB_R;
 		end
 	end
+
+	always @(posedge in_CLK or posedge in_RST) begin //delay a cycle
+		if (in_RST) begin
+			// reset
+			WB_eret <= 0;
+		end
+		else if (EN) begin
+			WB_eret <= WB_control[25];
+		end
+	end
+
+
 	wire [3:0]IG;
 	MINT m_MINT(clk,in_CLK,in_RST,code,BK,WB_eret,EPC,FDCLR,DECLR,R_FDCLR,R_DECLR,R_EECLR,FORCE,FADDR,IG,NIE);
 	INTERRUPT m_INTERRUPT(in_RST,clk,pro_reset,IG,INM,IE,code,BK,leds);

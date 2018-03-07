@@ -1,7 +1,7 @@
 //==================================================================================================
 //  Filename      : REGFILE.v
 //  Created On    : 2018-03-04 22:04:58
-//  Last Modified : 2018-03-06 16:33:12
+//  Last Modified : 2018-03-08 02:13:43
 //  Revision      : 
 //
 //  Description   : 
@@ -63,7 +63,7 @@ module REGFILE(in_clk,in_syscall,in_RST,in_regcontrol,in_Memdata,in_R,in_pcout,i
 		end
 
 		if(in_pcw)begin
-			rA <= in_rb;
+			rA <= in_p2;
 		end
 		else begin
 			if(in_syscall)begin
@@ -79,5 +79,5 @@ module REGFILE(in_clk,in_syscall,in_RST,in_regcontrol,in_Memdata,in_R,in_pcout,i
 
 	end
 	BASEREGFILE m_BASEREGFILE(in_clk,in_regcontrol[2],rW,rA,rB,W,out_A,out_B);
-	REGCP0 m_REGPC0(in_RST,in_clk,in_pcw,in_id_p4[1:0],out_A,rCP[1:0],out_CP,out_IE,out_INM,in_BK,in_NIE,in_WB_PC,out_EPC,in_eret,in_code,in_EXPCOUT,in_MEMPCOUT,in_WBIS,in_pcout,in_IDPCOUT);
+	REGCP0 m_REGPC0(in_RST,in_clk,in_pcw,in_p4[1:0],out_A,rCP[1:0],out_CP,out_IE,out_INM,in_BK,in_NIE,in_WB_PC,out_EPC,in_eret,in_code,in_EXPCOUT,in_MEMPCOUT,in_WBIS,in_pcout,in_IDPCOUT);
 endmodule

@@ -1,7 +1,7 @@
 //==================================================================================================
 //  Filename      : MINT.v
 //  Created On    : 2018-03-06 10:49:50
-//  Last Modified : 2018-03-08 00:00:08
+//  Last Modified : 2018-03-08 03:03:59
 //  Revision      : 
 //
 //  Description   : 
@@ -21,18 +21,21 @@ module MINT(in_CLK,in_DCLK,in_RST,in_code,in_BK,in_eret,in_EPC,in_FDCLR,in_DECLR
 	output reg out_NIE;
 	reg [1:0]rcode;
 	wire [31:0]int_addr;
+	wire flag;
+	assign flag = in_code[0]|in_code[1];
 	initial out_IG <= 0;
 
 	assign R_FDCLR = in_FDCLR|in_RST|in_BK|in_eret;
 	assign R_DECLR = in_DECLR|in_RST|in_BK|in_eret;
 	assign R_EECLR = in_RST|in_BK|in_eret;
 
-	always @(posedge in_CLK) begin
+	always @(posedge in_CLK or posedge flag) begin
 		if(in_BK)begin
 			out_NIE <= 0;//		
 			out_force <= 1;
-			out_pc <= int_addr;
 			out_IG <= 0;
+			if(rcode[0]|rcode[1])out_pc <= in_EPC;
+			else out_pc <= int_addr;
 		end
 		else begin
 			if(in_eret)begin

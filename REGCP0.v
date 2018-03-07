@@ -1,7 +1,7 @@
 //==================================================================================================
 //  Filename      : REGCPO.v
 //  Created On    : 2018-03-06 10:30:48
-//  Last Modified : 2018-03-07 23:56:30
+//  Last Modified : 2018-03-08 02:46:53
 //  Revision      : 
 //
 //  Description   : 
@@ -25,8 +25,8 @@ module REGCP0(in_RST,in_CLK,WE,rW,W,rA,A,out_IE,out_INM,in_BK,in_NIE,in_WB_PC,ou
 	output out_IE;
 	output [3:0]out_INM;
 	output [31:0]out_EPC;
-	wire rcode;
-	assign rcode = in_code[0]|in_code[1];
+	// wire rcode;
+	// assign rcode = in_code[0]|in_code[1];
 	// 0 for IE
 	// 1 for INM
 	// 2 for EPC
@@ -52,14 +52,14 @@ module REGCP0(in_RST,in_CLK,WE,rW,W,rA,A,out_IE,out_INM,in_BK,in_NIE,in_WB_PC,ou
 				CP0[0][0] <= in_NIE;
 				CP0[0][31:1] <= 0;
 			end
-			if(WE&&(rW == 1))begin
+			if(WE)begin
 				CP0[rW] <= W;
 			end
 		end
 	end
 
 
-	always @(posedge rcode) begin
+	always @(posedge in_BK) begin
 		if(in_RST)CP0[2] <= 0;
 		else begin
 			if(in_MEMPCOUT != 0)CP0[2] <= in_MEMPCOUT - 1;

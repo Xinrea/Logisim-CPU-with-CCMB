@@ -1,8 +1,8 @@
 #############################################################
-#²âÊÔj,jal,jrÖ¸Áî£¬ÈçÐèÒª¿É·Ö¿ª²âÊÔ£¬Ö´ÐÐÕý³£Ó¦¸ÃÊÇ15¸öÖÜÆÚ revise date 2015/12/17 tiger
+#ï¿½ï¿½ï¿½ï¿½j,jal,jrÖ¸ï¿½î£¬ï¿½ï¿½ï¿½ï¿½Òªï¿½É·Ö¿ï¿½ï¿½ï¿½ï¿½Ô£ï¿½Ö´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½15ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ revise date 2015/12/17 tiger
 #############################################################
 .text
- addi $s1,$zero, 1   #²âÊÔj,jal,jrÖ¸Áî£¬ÈçÐèÒª¿É·Ö¿ª²âÊÔ£¬Ö´ÐÐÕý³£Ó¦¸ÃÊÇ15¸öÖÜÆÚ
+ addi $s1,$zero, 1   #ï¿½ï¿½ï¿½ï¿½j,jal,jrÖ¸ï¿½î£¬ï¿½ï¿½ï¿½ï¿½Òªï¿½É·Ö¿ï¿½ï¿½ï¿½ï¿½Ô£ï¿½Ö´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½15ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
  j jmp_next1
  addi $s1,$zero, 1
  addi $s2,$zero, 2
@@ -27,21 +27,21 @@ jmp_next4:jal jmp_count
 ######################################
 
 
-#ÒÆÎ»²âÊÔ  ÐèÒªÖ§³Ö³¬addi,sll,add,syscall,srl,sll,sra,beq,j,syscall    revise date:2015/12/16 tiger
+#ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½  ï¿½ï¿½ÒªÖ§ï¿½Ö³ï¿½addi,sll,add,syscall,srl,sll,sra,beq,j,syscall    revise date:2015/12/16 tiger
 
 .text
-addi $s0,$zero,1     #¼òµ¥ÒÆÎ»£¬Ñ­»·²âÊÔ£¬0ºÅÇøÓòÏÔÊ¾µÄÊÇ³õÊ¼Öµ1×óÒÆ1Î»ÖØ¸´15´ÎµÄÖµ£¬1ºÅÇøÓòÊÇÀÛ¼ÓÖµ
+addi $s0,$zero,1     #ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½Ñ­ï¿½ï¿½ï¿½ï¿½ï¿½Ô£ï¿½0ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½Ç³ï¿½Ê¼Öµ1ï¿½ï¿½ï¿½ï¿½1Î»ï¿½Ø¸ï¿½15ï¿½Îµï¿½Öµï¿½ï¿½1ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Û¼ï¿½Öµ
 addi $s1,$zero,1  
-sll $s1, $s1, 31   #Âß¼­×óÒÆ31Î» $s1=0x80000000
+sll $s1, $s1, 31   #ï¿½ß¼ï¿½ï¿½ï¿½ï¿½ï¿½31Î» $s1=0x80000000
  
 
 ###################################################################
-#                Âß¼­ÓÒÒÆ²âÊÔ 
-# ÏÔÊ¾ÇøÓòÒÀ´ÎÏÔÊ¾0x80000000 0x20000000 0x08000000 0x02000000 0x00800000 0x00200000 0x00080000 0x00020000 0x00008000 0x00002000 0x00000800 0x00000200 0x00000080 0x00000020 0x00000008 0x00000002 0x00000000  
+#                ï¿½ß¼ï¿½ï¿½ï¿½ï¿½Æ²ï¿½ï¿½ï¿½ 
+# ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾0x80000000 0x20000000 0x08000000 0x02000000 0x00800000 0x00200000 0x00080000 0x00020000 0x00008000 0x00002000 0x00000800 0x00000200 0x00000080 0x00000020 0x00000008 0x00000002 0x00000000  
 ###################################################################
-LogicalRightShift:            #Âß¼­ÓÒÒÆ²âÊÔ£¬½«×î¸ßÎ»1ÖðÎ»ÏòÓÒÓÒÒÆÖ±ÖÁ½á¹ûÎªÁã
+LogicalRightShift:            #ï¿½ß¼ï¿½ï¿½ï¿½ï¿½Æ²ï¿½ï¿½Ô£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»1ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½
 
-add    $a0,$0,$s1       #display $s1    #Âß¼­ÓÒÒÆ²âÊÔ£¬½«×î¸ßÎ»1ÖðÎ»ÏòÓÒÓÒÒÆÖ±ÖÁ½á¹ûÎªÁã
+add    $a0,$0,$s1       #display $s1    #ï¿½ß¼ï¿½ï¿½ï¿½ï¿½Æ²ï¿½ï¿½Ô£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»1ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½
 addi   $v0,$0,34        # display hex
 syscall                 # we are out of here.  
      
@@ -57,12 +57,12 @@ syscall                 # we are out of here.
 
 
 ###################################################################
-#                Âß¼­×óÒÆ²âÊÔ 
-# ÏÔÊ¾ÇøÓòÒÀ´ÎÏÔÊ¾0x00000004 0x00000010 0x00000040 0x00000100 0x00000400 0x00001000 0x00004000 0x00010000 0x00040000 0x00100000 0x00400000 0x01000000 0x04000000 0x10000000 0x40000000 0x00000000 
+#                ï¿½ß¼ï¿½ï¿½ï¿½ï¿½Æ²ï¿½ï¿½ï¿½ 
+# ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾0x00000004 0x00000010 0x00000040 0x00000100 0x00000400 0x00001000 0x00004000 0x00010000 0x00040000 0x00100000 0x00400000 0x01000000 0x04000000 0x10000000 0x40000000 0x00000000 
 ###################################################################
 
-addi $s1,$zero, 1        #                Âß¼­×óÒÆ²âÊÔ 
-LogicalLeftShift:         #Âß¼­×óÒÆ²âÊÔ£¬½«×îµÍÎ»1ÖðÎ»Ïò×óÒÆÖ±ÖÁ½á¹ûÎªÁã
+addi $s1,$zero, 1        #                ï¿½ß¼ï¿½ï¿½ï¿½ï¿½Æ²ï¿½ï¿½ï¿½ 
+LogicalLeftShift:         #ï¿½ß¼ï¿½ï¿½ï¿½ï¿½Æ²ï¿½ï¿½Ô£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»1ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½
 sll $s1, $s1, 2  
 
 add    $a0,$0,$s1       #display $s1
@@ -74,13 +74,13 @@ j LogicalLeftShift
 
 
 ###################################################################
-#                ËãÊõÓÒÒÆ²âÊÔ 
-# ÏÔÊ¾ÇøÓòÒÀ´ÎÏÔÊ¾0x80000000 0xf0000000 0xff000000 0xfff00000 0xffff0000 0xfffff000 0xffffff00 0xfffffff0 0xffffffff 
+#                ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ²ï¿½ï¿½ï¿½ 
+# ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾0x80000000 0xf0000000 0xff000000 0xfff00000 0xffff0000 0xfffff000 0xffffff00 0xfffffff0 0xffffffff 
 ###################################################################
-ArithRightShift:          #ËãÊõÓÒÒÆ²âÊÔ£¬#ËãÊõÒÆÎ»²âÊÔ£¬80000000ËãÊõÓÒÒÆ£¬ÒÀ´ÎÏÔÊ¾ÎªF0000000,FF000000,FFF00000,FFFF0000Ö±ÖÁFFFFFFFF
+ArithRightShift:          #ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ²ï¿½ï¿½Ô£ï¿½#ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½Ô£ï¿½80000000ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ÎªF0000000,FF000000,FFF00000,FFFF0000Ö±ï¿½ï¿½FFFFFFFF
 
-addi $s1,$zero,1     #                ËãÊõÓÒÒÆ²âÊÔ 
-sll $s1, $s1, 31   #Âß¼­×óÒÆ31Î» $s1=0x80000000
+addi $s1,$zero,1     #                ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ²ï¿½ï¿½ï¿½ 
+sll $s1, $s1, 31   #ï¿½ß¼ï¿½ï¿½ï¿½ï¿½ï¿½31Î» $s1=0x80000000
 
 add    $a0,$0,$s1       #display $s1
 addi   $v0,$0,34         # display hex
@@ -141,7 +141,7 @@ addi   $v0,$0,34         # display hex
 syscall                 # we are out of here.  
 
 #############################################################
-#×ßÂíµÆ²âÊÔ,²âÊÔaddi,andi,sll,srl,sra,or,ori,nor,syscall  LED°´×ßÂíµÆ·½Ê½À´»ØÏÔÊ¾Êý¾Ý
+#ï¿½ï¿½ï¿½ï¿½Æ²ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½addi,andi,sll,srl,sra,or,ori,nor,syscall  LEDï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½
 #############################################################
 
 .text
@@ -151,10 +151,10 @@ sra $s3, $s3, 31      # $s3=0xFFFFFFFF
 addu $s0,$zero,$zero   # $s0=0         
 addi $s2,$zero,12 
 
-addiu $s6,$0,3  #×ßÂíµÆ¼ÆÊý
+addiu $s6,$0,3  #ï¿½ï¿½ï¿½ï¿½Æ¼ï¿½ï¿½ï¿½
 zmd_loop:
 
-addiu $s0, $s0, 1    #¼ÆËãÏÂÒ»¸ö×ßÂíµÆµÄÊý¾Ý
+addiu $s0, $s0, 1    #ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æµï¿½ï¿½ï¿½ï¿½ï¿½
 andi $s0, $s0, 15  
 
 #######################################
@@ -162,7 +162,7 @@ addi $t0,$0,8
 addi $t1,$0,1
 left:
 
-sll $s3, $s3, 4   #×ßÂíµÆ×óÒÆ
+sll $s3, $s3, 4   #ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 or $s3, $s3, $s0
 
 add    $a0,$0,$s3       # display $s3
@@ -173,7 +173,7 @@ sub $t0,$t0,$t1
 bne $t0,$0,left
 #######################################
 
-addi $s0, $s0, 1   #¼ÆËãÏÂÒ»¸ö×ßÂíµÆµÄÊý¾Ý
+addi $s0, $s0, 1   #ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æµï¿½ï¿½ï¿½ï¿½ï¿½
 addi $t8,$0,15
 and $s0, $s0, $t8
 sll $s0, $s0, 28     
@@ -183,7 +183,7 @@ addi $t1,$0,1
 
 zmd_right:
 
-srl $s3, $s3, 4  #×ßÂíµÆÓÒÒÆ
+srl $s3, $s3, 4  #ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 or $s3, $s3, $s0
 
 addu    $a0,$0,$s3       # display $s3
@@ -210,8 +210,8 @@ addu   $a0,$0,$t0       # display $t0
 addi   $v0,$0,34         # system call for LED display 
 syscall                 # display 
 #################################################################################
-#±¾³ÌÐòÊµÏÖ0-15ºÅ×Öµ¥ÔªµÄ½µÐòÅÅÐò,´Ë³ÌÐò¿ÉÔÚmars mips·ÂÕæÆ÷ÖÐÔËÐÐ
-#ÔËÐÐÊ±Çë½«Mars SettingÖÐµÄMemory ConfigurationÉèÖÃÎªCompact£¬data at address 0
+#ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½0-15ï¿½ï¿½ï¿½Öµï¿½Ôªï¿½Ä½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½Ë³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½mars mipsï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+#ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ë½«Mars Settingï¿½Ðµï¿½Memory Configurationï¿½ï¿½ï¿½ï¿½ÎªCompactï¿½ï¿½data at address 0
 #
 #################################################################################
  .text
@@ -271,12 +271,12 @@ sort_init:
  addi $s0,$s0,1
  
  add $s0,$zero,$zero   
- addi $s1,$zero,60   #ÅÅÐòÇø¼ä
+ addi $s1,$zero,60   #ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 sort_loop:
  lw $s3,0($s0)     
  lw $s4,0($s1)
  slt $t0,$s3,$s4
- beq $t0,$0,sort_next   #½µÐòÅÅÐò
+ beq $t0,$0,sort_next   #ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
  sw $s3, 0($s1)
  sw $s4, 0($s0)   
 sort_next:
@@ -293,7 +293,7 @@ sort_next:
 
  addi   $v0,$zero,10         # system call for exit
  syscall                  # we are out of here.   
- #MIPS´¦ÀíÆ÷ÊµÏÖÖÐÇëÓÃÍ£»úÖ¸ÁîÊµÏÖsyscall
+ #MIPSï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í£ï¿½ï¿½Ö¸ï¿½ï¿½Êµï¿½ï¿½syscall
 
 jmp_count: addi $s0,$zero, 0
        addi $s0,$s0, 1
@@ -339,20 +339,41 @@ jmp_count: addi $s0,$zero, 0
 
        
        jr $31
-int_program1:
-sw $sp,0x00000800($zero)
-addiu $sp,$zero,0x00000800 #³õÊ¼»¯Õ»Ö¸Õë
 
-addi $sp,$sp,-4 #±£´æÏÖ³¡
+
+intp1:
+bne $sp,$0,begin1
+sw $sp,0x00000800
+addi $sp,$sp,0x00000800
+begin1:
+sw $sp,0($sp)
+addi $sp,$sp,-4
+sw $1,0($sp)
+addi $sp,$sp,-4 #ï¿½ï¿½ï¿½ï¿½ï¿½Ö³ï¿½
 sw $s1,0($sp)
 addi $sp,$sp,-4
 sw $a0,0($sp)
 addi $sp,$sp,-4
 sw $v0,0($sp)
 
+addi $sp,$sp,-4
+mfc0 $1,$1 #inm
+nop
+nop
+sw $1,0($sp)
+addi $sp,$sp,-4
+mfc0 $1,$2 #epc
+nop
+nop
+sw $1,0($sp)
 
-addi $s1,$zero,1     #                ËãÊõÓÒÒÆ²âÊÔ 
-sll $s1, $s1, 28   #Âß¼­×óÒÆ31Î» $s1=0x80000000
+addi $1,$0,1
+mtc0 $1,$1 #INM <= 001
+addi $1,$0,1
+mtc0 $1,$0 #IE <= 1
+
+addi $s1,$zero,1     #                ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ²ï¿½ï¿½ï¿½ 
+sll $s1, $s1, 28   #ï¿½ß¼ï¿½ï¿½ï¿½ï¿½ï¿½31Î» $s1=0x80000000
 
 add    $a0,$0,$s1       #display $s1
 addi   $v0,$0,34         # display hex
@@ -411,189 +432,63 @@ add    $a0,$0,$s1       #display $s1
 addi   $v0,$0,34         # display hex
 
 
-lw $v0,0($sp) #»Ö¸´ÏÖ³¡
+
+mtc0 $0,$0 #IE <= 0
+
+lw $1,0($sp)
+mtc0 $1,$2 #ecp
+addi $sp,$sp,4
+lw $1,0($sp)
+mtc0 $1,$1 #inm
+addi $sp,$sp,4
+lw $v0,0($sp) #ï¿½Ö¸ï¿½ï¿½Ö³ï¿½
 addi $sp,$sp,4
 lw $a0,0($sp)
 addi $sp,$sp,4
 lw $s1,0($sp)
 addi $sp,$sp,4
+lw $1,0($sp)
+addi $sp,$sp,4
 lw $sp,0($sp)
-eret #·µ»Ø
 
-int_program2:
-sw $sp,0x00000800($zero)
-addiu $sp,$zero,0x00000800 #³õÊ¼»¯Õ»Ö¸Õë
+addi $30,$0,1
+eret
+mtc0 $30,$0 #IE <= 1
 
-addi $sp,$sp,-4 #±£´æÏÖ³¡
+
+intp2:
+bne $sp,$0,begin2
+sw $sp,0x00000800
+addi $sp,$sp,0x00000800
+begin2:
+sw $sp,0($sp)
+addi $sp,$sp,-4
+sw $1,0($sp)
+addi $sp,$sp,-4 #ï¿½ï¿½ï¿½ï¿½ï¿½Ö³ï¿½
 sw $s1,0($sp)
 addi $sp,$sp,-4
 sw $a0,0($sp)
 addi $sp,$sp,-4
 sw $v0,0($sp)
 
-
-addi $s1,$zero,2     #                ËãÊõÓÒÒÆ²âÊÔ 
-sll $s1, $s1, 28   #Âß¼­×óÒÆ31Î» $s1=0x80000000
-
-add    $a0,$0,$s1       #display $s1
-addi   $v0,$0,34         # display hex
-syscall                 # we are out of here.  
-
-add    $a0,$0,$s1       #display $s1
-addi   $v0,$0,34         # display hex
-syscall                 # we are out of here.  
-
-
-sra $s1, $s1, 4    #0XF0000000-->0XFF000000
-
-add    $a0,$0,$s1       #display $s1
-addi   $v0,$0,34         # display hex
-syscall                 # we are out of here.  
-
-
-sra $s1, $s1, 4    #0XFF000000-->0XFFF00000
-
-add    $a0,$0,$s1       #display $s1
-addi   $v0,$0,34         # display hex
-syscall                 # we are out of here.  
-
-sra $s1, $s1, 4    
-
-add    $a0,$0,$s1       #display $s1
-addi   $v0,$0,34         # display hex
-syscall                 # we are out of here.  
-
-sra $s1, $s1, 4    
-
-add    $a0,$0,$s1       #display $s1
-addi   $v0,$0,34         # display hex
-syscall                 # we are out of here.  
-
-
-sra $s1, $s1, 4    
-
-add    $a0,$0,$s1       #display $s1
-addi   $v0,$0,34         # display hex
-syscall                 # we are out of here.  
-
-
-sra $s1, $s1, 4    
-
-add    $a0,$0,$s1       #display $s1
-addi   $v0,$0,34         # display hex
-syscall                 # we are out of here.  
-
-
-sra $s1, $s1, 4    
-
-
-add    $a0,$0,$s1       #display $s1
-addi   $v0,$0,34         # display hex
-
-
-lw $v0,0($sp) #»Ö¸´ÏÖ³¡
-addi $sp,$sp,4
-lw $a0,0($sp)
-addi $sp,$sp,4
-lw $s1,0($sp)
-addi $sp,$sp,4
-lw $sp,0($sp)
-eret #·µ»Ø
-
-int_program3:
-sw $sp,0x00000800($zero)
-addiu $sp,$zero,0x00000800 #³õÊ¼»¯Õ»Ö¸Õë
-
-addi $sp,$sp,-4 #±£´æÏÖ³¡
-sw $s1,0($sp)
 addi $sp,$sp,-4
-sw $a0,0($sp)
+mfc0 $1,$1 #inm
+nop
+nop
+sw $1,0($sp)
 addi $sp,$sp,-4
-sw $v0,0($sp)
+mfc0 $1,$2 #epc
+nop
+nop
+sw $1,0($sp)
 
+addi $1,$0,3
+mtc0 $1,$1 #INM <= 011
+addi $1,$0,1
+mtc0 $1,$0 #IE <= 1
 
-addi $s1,$zero,3     #                ËãÊõÓÒÒÆ²âÊÔ 
-sll $s1, $s1, 28   #Âß¼­×óÒÆ31Î» $s1=0x80000000
-
-add    $a0,$0,$s1       #display $s1
-addi   $v0,$0,34         # display hex
-syscall                 # we are out of here.  
-
-add    $a0,$0,$s1       #display $s1
-addi   $v0,$0,34         # display hex
-syscall                 # we are out of here.  
-
-
-sra $s1, $s1, 4    #0XF0000000-->0XFF000000
-
-add    $a0,$0,$s1       #display $s1
-addi   $v0,$0,34         # display hex
-syscall                 # we are out of here.  
-
-
-sra $s1, $s1, 4    #0XFF000000-->0XFFF00000
-
-add    $a0,$0,$s1       #display $s1
-addi   $v0,$0,34         # display hex
-syscall                 # we are out of here.  
-
-sra $s1, $s1, 4    
-
-add    $a0,$0,$s1       #display $s1
-addi   $v0,$0,34         # display hex
-syscall                 # we are out of here.  
-
-sra $s1, $s1, 4    
-
-add    $a0,$0,$s1       #display $s1
-addi   $v0,$0,34         # display hex
-syscall                 # we are out of here.  
-
-
-sra $s1, $s1, 4    
-
-add    $a0,$0,$s1       #display $s1
-addi   $v0,$0,34         # display hex
-syscall                 # we are out of here.  
-
-
-sra $s1, $s1, 4    
-
-add    $a0,$0,$s1       #display $s1
-addi   $v0,$0,34         # display hex
-syscall                 # we are out of here.  
-
-
-sra $s1, $s1, 4    
-
-
-add    $a0,$0,$s1       #display $s1
-addi   $v0,$0,34         # display hex
-
-
-lw $v0,0($sp) #»Ö¸´ÏÖ³¡
-addi $sp,$sp,4
-lw $a0,0($sp)
-addi $sp,$sp,4
-lw $s1,0($sp)
-addi $sp,$sp,4
-lw $sp,0($sp)
-eret #·µ»Ø
-
-int_program4:
-sw $sp,0x00000800($zero)
-addiu $sp,$zero,0x00000800 #³õÊ¼»¯Õ»Ö¸Õë
-
-addi $sp,$sp,-4 #±£´æÏÖ³¡
-sw $s1,0($sp)
-addi $sp,$sp,-4
-sw $a0,0($sp)
-addi $sp,$sp,-4
-sw $v0,0($sp)
-
-
-addi $s1,$zero,4     #                ËãÊõÓÒÒÆ²âÊÔ 
-sll $s1, $s1, 28   #Âß¼­×óÒÆ31Î» $s1=0x80000000
+addi $s1,$zero,2     #                ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ²ï¿½ï¿½ï¿½ 
+sll $s1, $s1, 28   #ï¿½ß¼ï¿½ï¿½ï¿½ï¿½ï¿½31Î» $s1=0x80000000
 
 add    $a0,$0,$s1       #display $s1
 addi   $v0,$0,34         # display hex
@@ -652,11 +547,140 @@ add    $a0,$0,$s1       #display $s1
 addi   $v0,$0,34         # display hex
 
 
-lw $v0,0($sp) #»Ö¸´ÏÖ³¡
+
+mtc0 $0,$0 #IE <= 0
+
+lw $1,0($sp)
+mtc0 $1,$2 #ecp
+addi $sp,$sp,4
+lw $1,0($sp)
+mtc0 $1,$1 #inm
+addi $sp,$sp,4
+lw $v0,0($sp) #ï¿½Ö¸ï¿½ï¿½Ö³ï¿½
 addi $sp,$sp,4
 lw $a0,0($sp)
 addi $sp,$sp,4
 lw $s1,0($sp)
 addi $sp,$sp,4
+lw $1,0($sp)
+addi $sp,$sp,4
 lw $sp,0($sp)
-eret #·µ»Ø
+
+addi $30,$0,1
+eret
+mtc0 $30,$0 #IE <= 1
+
+
+intp3:
+bne $sp,$0,begin3
+sw $sp,0x00000800
+addi $sp,$sp,0x00000800
+begin3:
+sw $sp,0($sp)
+addi $sp,$sp,-4
+sw $1,0($sp)
+addi $sp,$sp,-4 #ï¿½ï¿½ï¿½ï¿½ï¿½Ö³ï¿½
+sw $s1,0($sp)
+addi $sp,$sp,-4
+sw $a0,0($sp)
+addi $sp,$sp,-4
+sw $v0,0($sp)
+
+addi $sp,$sp,-4
+mfc0 $1,$1 #inm
+nop
+nop
+sw $1,0($sp)
+addi $sp,$sp,-4
+mfc0 $1,$2 #epc
+nop
+nop
+sw $1,0($sp)
+
+addi $1,$0,7
+mtc0 $1,$1 #INM <= 111
+addi $1,$0,1
+mtc0 $1,$0 #IE <= 1
+
+addi $s1,$zero,3     #                ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ²ï¿½ï¿½ï¿½ 
+sll $s1, $s1, 28   #ï¿½ß¼ï¿½ï¿½ï¿½ï¿½ï¿½31Î» $s1=0x80000000
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+syscall                 # we are out of here.  
+
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+syscall                 # we are out of here.  
+
+
+sra $s1, $s1, 4    #0XF0000000-->0XFF000000
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+syscall                 # we are out of here.  
+
+
+sra $s1, $s1, 4    #0XFF000000-->0XFFF00000
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+syscall                 # we are out of here.  
+
+sra $s1, $s1, 4    
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+syscall                 # we are out of here.  
+
+sra $s1, $s1, 4    
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+syscall                 # we are out of here.  
+
+
+sra $s1, $s1, 4    
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+syscall                 # we are out of here.  
+
+
+sra $s1, $s1, 4    
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+syscall                 # we are out of here.  
+
+
+sra $s1, $s1, 4    
+
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+
+
+
+mtc0 $0,$0 #IE <= 0
+
+lw $1,0($sp)
+mtc0 $1,$2 #ecp
+addi $sp,$sp,4
+lw $1,0($sp)
+mtc0 $1,$1 #inm
+addi $sp,$sp,4
+lw $v0,0($sp) #ï¿½Ö¸ï¿½ï¿½Ö³ï¿½
+addi $sp,$sp,4
+lw $a0,0($sp)
+addi $sp,$sp,4
+lw $s1,0($sp)
+addi $sp,$sp,4
+lw $1,0($sp)
+addi $sp,$sp,4
+lw $sp,0($sp)
+
+addi $30,$0,1
+eret
+mtc0 $30,$0 #IE <= 1
