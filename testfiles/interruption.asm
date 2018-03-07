@@ -412,11 +412,11 @@ addi   $v0,$0,34         # display hex
 
 
 lw $v0,0($sp) #恢复现场
-addiu $sp,$sp,4
+addi $sp,$sp,4
 lw $a0,0($sp)
-addiu $sp,$sp,4
+addi $sp,$sp,4
 lw $s1,0($sp)
-addiu $sp,$sp,4
+addi $sp,$sp,4
 lw $sp,0($sp)
 eret #返回
 
@@ -492,11 +492,11 @@ addi   $v0,$0,34         # display hex
 
 
 lw $v0,0($sp) #恢复现场
-addiu $sp,$sp,4
+addi $sp,$sp,4
 lw $a0,0($sp)
-addiu $sp,$sp,4
+addi $sp,$sp,4
 lw $s1,0($sp)
-addiu $sp,$sp,4
+addi $sp,$sp,4
 lw $sp,0($sp)
 eret #返回
 
@@ -572,11 +572,11 @@ addi   $v0,$0,34         # display hex
 
 
 lw $v0,0($sp) #恢复现场
-addiu $sp,$sp,4
+addi $sp,$sp,4
 lw $a0,0($sp)
-addiu $sp,$sp,4
+addi $sp,$sp,4
 lw $s1,0($sp)
-addiu $sp,$sp,4
+addi $sp,$sp,4
 lw $sp,0($sp)
 eret #返回
 
@@ -653,10 +653,10 @@ addi   $v0,$0,34         # display hex
 
 
 lw $v0,0($sp) #恢复现场
-addiu $sp,$sp,4
+addi $sp,$sp,4
 lw $a0,0($sp)
-addiu $sp,$sp,4
+addi $sp,$sp,4
 lw $s1,0($sp)
-addiu $sp,$sp,4
+addi $sp,$sp,4
 lw $sp,0($sp)
 eret #返回
