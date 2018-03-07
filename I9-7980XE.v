@@ -1,7 +1,7 @@
 //==================================================================================================
 //  Filename      : I9-7980XE.v
 //  Created On    : 2018-03-05 13:39:32
-//  Last Modified : 2018-03-06 16:36:13
+//  Last Modified : 2018-03-07 23:39:15
 //  Revision      : 
 //
 //  Description   : 
@@ -156,7 +156,7 @@ module I9_7980XE(clk,in_RST,pro_reset,in_addr,changef,leds,SEG,AN);
 		end
 	end
 	wire [3:0]IG;
-	MINT m_MINT(clk,in_RST,code,BK,WB_eret,EPC,FDCLR,DECLR,R_FDCLR,R_DECLR,R_EECLR,FORCE,FADDR,IG,NIE);
+	MINT m_MINT(clk,in_CLK,in_RST,code,BK,WB_eret,EPC,FDCLR,DECLR,R_FDCLR,R_DECLR,R_EECLR,FORCE,FADDR,IG,NIE);
 	INTERRUPT m_INTERRUPT(in_RST,clk,pro_reset,IG,INM,IE,code,BK,leds);
 	wire PEN;
 	REDIRECTION m_REDIRECTION(EN,in_CLK,in_RST,EX_J,JS,MEM_control[11],WB_control[11],ID_IS,EX_IS,MEM_is,WB_is,DECLR,FDCLR,BEN,PEN,ALUREDI,SYSREDI,CSW,CLW);

@@ -1,15 +1,15 @@
 //==================================================================================================
 //  Filename      : MINT.v
 //  Created On    : 2018-03-06 10:49:50
-//  Last Modified : 2018-03-06 16:41:34
+//  Last Modified : 2018-03-08 00:00:08
 //  Revision      : 
 //
 //  Description   : 
 //
 //
 //==================================================================================================
-module MINT(in_CLK,in_RST,in_code,in_BK,in_eret,in_EPC,in_FDCLR,in_DECLR,R_FDCLR,R_DECLR,R_EECLR,out_force,out_pc,out_IG,out_NIE);
-	input in_CLK,in_RST;
+module MINT(in_CLK,in_DCLK,in_RST,in_code,in_BK,in_eret,in_EPC,in_FDCLR,in_DECLR,R_FDCLR,R_DECLR,R_EECLR,out_force,out_pc,out_IG,out_NIE);
+	input in_CLK,in_DCLK,in_RST;
 	input [1:0]in_code;
 	input in_BK,in_eret;
 	input [31:0]in_EPC;

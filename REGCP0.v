@@ -1,7 +1,7 @@
 //==================================================================================================
 //  Filename      : REGCPO.v
 //  Created On    : 2018-03-06 10:30:48
-//  Last Modified : 2018-03-06 16:35:24
+//  Last Modified : 2018-03-07 23:56:30
 //  Revision      : 
 //
 //  Description   : 
@@ -38,7 +38,7 @@ module REGCP0(in_RST,in_CLK,WE,rW,W,rA,A,out_IE,out_INM,in_BK,in_NIE,in_WB_PC,ou
 		CP0[2] <= 0;
 	end
 
-	always @(posedge in_CLK or posedge in_RST) begin
+	always @(negedge in_CLK or negedge in_RST) begin
 		if(in_RST)begin
 			CP0[0] <= 1;
 			CP0[1] <= 0;

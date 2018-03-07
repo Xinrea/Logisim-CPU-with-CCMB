@@ -1,7 +1,7 @@
 //==================================================================================================
 //  Filename      : testbench.v
 //  Created On    : 2018-03-05 15:05:36
-//  Last Modified : 2018-03-05 15:13:00
+//  Last Modified : 2018-03-07 23:33:49
 //  Revision      : 
 //
 //  Description   : 
@@ -28,7 +28,7 @@ module testbench();
 		$dumpfile("counter_test.vcd");
 		$dumpvars(0, m_I9);
 
-		#40000 pro_reset[0] = 1;
+		#43000 pro_reset[0] = 1;
 		#1000 pro_reset[0] = 0;
 		#10000 pro_reset[1] = 1;
 		#1000 pro_reset[1] = 0;

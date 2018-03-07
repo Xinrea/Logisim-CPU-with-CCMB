@@ -1,5 +1,5 @@
 #############################################################
-#×ßÂíµÆ²âÊÔ,²âÊÔaddi,andi,sll,srl,sra,or,ori,nor,syscall  LED°´×ßÂíµÆ·½Ê½À´»ØÏÔÊ¾Êý¾Ý
+#ï¿½ï¿½ï¿½ï¿½Æ²ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½addi,andi,sll,srl,sra,or,ori,nor,syscall  LEDï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½
 #############################################################
 
 .text
@@ -9,10 +9,10 @@ sra $s3, $s3, 31      # $s3=0xFFFFFFFF
 addu $s0,$zero,$zero   # $s0=0         
 addi $s2,$zero,12 
 
-addiu $s6,$0,3  #×ßÂíµÆ¼ÆÊý
+addiu $s6,$0,3  #ï¿½ï¿½ï¿½ï¿½Æ¼ï¿½ï¿½ï¿½
 zmd_loop:
 
-addiu $s0, $s0, 1    #¼ÆËãÏÂÒ»¸ö×ßÂíµÆµÄÊý¾Ý
+addiu $s0, $s0, 1    #ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æµï¿½ï¿½ï¿½ï¿½ï¿½
 andi $s0, $s0, 15  
 
 #######################################
@@ -20,7 +20,7 @@ addi $t0,$0,8
 addi $t1,$0,1
 left:
 
-sll $s3, $s3, 4   #×ßÂíµÆ×óÒÆ
+sll $s3, $s3, 4   #ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 or $s3, $s3, $s0
 
 add    $a0,$0,$s3       # display $s3
@@ -31,7 +31,7 @@ sub $t0,$t0,$t1
 bne $t0,$0,left
 #######################################
 
-addi $s0, $s0, 1   #¼ÆËãÏÂÒ»¸ö×ßÂíµÆµÄÊý¾Ý
+addi $s0, $s0, 1   #ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æµï¿½ï¿½ï¿½ï¿½ï¿½
 addi $t8,$0,15
 and $s0, $s0, $t8
 sll $s0, $s0, 28     
@@ -41,7 +41,7 @@ addi $t1,$0,1
 
 zmd_right:
 
-srl $s3, $s3, 4  #×ßÂíµÆÓÒÒÆ
+srl $s3, $s3, 4  #ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 or $s3, $s3, $s0
 
 addu    $a0,$0,$s3       # display $s3
@@ -71,3 +71,324 @@ syscall                 # display
 addi   $v0,$zero,10         # system call for exit
 syscall                  # we are out of here. 
 
+int_program1:
+sw $sp,0x00000800($zero)
+addiu $sp,$zero,0x00000800 #ï¿½ï¿½Ê¼ï¿½ï¿½Õ»Ö¸ï¿½ï¿½
+
+addi $sp,$sp,-4 #ï¿½ï¿½ï¿½ï¿½ï¿½Ö³ï¿½
+sw $s1,0($sp)
+addi $sp,$sp,-4
+sw $a0,0($sp)
+addi $sp,$sp,-4
+sw $v0,0($sp)
+
+
+addi $s1,$zero,1     #                ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ²ï¿½ï¿½ï¿½ 
+sll $s1, $s1, 28   #ï¿½ß¼ï¿½ï¿½ï¿½ï¿½ï¿½31Î» $s1=0x80000000
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+syscall                 # we are out of here.  
+
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+syscall                 # we are out of here.  
+
+
+sra $s1, $s1, 4    #0XF0000000-->0XFF000000
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+syscall                 # we are out of here.  
+
+
+sra $s1, $s1, 4    #0XFF000000-->0XFFF00000
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+syscall                 # we are out of here.  
+
+sra $s1, $s1, 4    
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+syscall                 # we are out of here.  
+
+sra $s1, $s1, 4    
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+syscall                 # we are out of here.  
+
+
+sra $s1, $s1, 4    
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+syscall                 # we are out of here.  
+
+
+sra $s1, $s1, 4    
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+syscall                 # we are out of here.  
+
+
+sra $s1, $s1, 4    
+
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+
+
+lw $v0,0($sp) #ï¿½Ö¸ï¿½ï¿½Ö³ï¿½
+addi $sp,$sp,4
+lw $a0,0($sp)
+addi $sp,$sp,4
+lw $s1,0($sp)
+addi $sp,$sp,4
+lw $sp,0($sp)
+eret #ï¿½ï¿½ï¿½ï¿½
+
+int_program2:
+sw $sp,0x00000800($zero)
+addiu $sp,$zero,0x00000800 #ï¿½ï¿½Ê¼ï¿½ï¿½Õ»Ö¸ï¿½ï¿½
+
+addi $sp,$sp,-4 #ï¿½ï¿½ï¿½ï¿½ï¿½Ö³ï¿½
+sw $s1,0($sp)
+addi $sp,$sp,-4
+sw $a0,0($sp)
+addi $sp,$sp,-4
+sw $v0,0($sp)
+
+
+addi $s1,$zero,2     #                ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ²ï¿½ï¿½ï¿½ 
+sll $s1, $s1, 28   #ï¿½ß¼ï¿½ï¿½ï¿½ï¿½ï¿½31Î» $s1=0x80000000
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+syscall                 # we are out of here.  
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+syscall                 # we are out of here.  
+
+
+sra $s1, $s1, 4    #0XF0000000-->0XFF000000
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+syscall                 # we are out of here.  
+
+
+sra $s1, $s1, 4    #0XFF000000-->0XFFF00000
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+syscall                 # we are out of here.  
+
+sra $s1, $s1, 4    
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+syscall                 # we are out of here.  
+
+sra $s1, $s1, 4    
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+syscall                 # we are out of here.  
+
+
+sra $s1, $s1, 4    
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+syscall                 # we are out of here.  
+
+
+sra $s1, $s1, 4    
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+syscall                 # we are out of here.  
+
+
+sra $s1, $s1, 4    
+
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+
+
+lw $v0,0($sp) #ï¿½Ö¸ï¿½ï¿½Ö³ï¿½
+addi $sp,$sp,4
+lw $a0,0($sp)
+addi $sp,$sp,4
+lw $s1,0($sp)
+addi $sp,$sp,4
+lw $sp,0($sp)
+eret #ï¿½ï¿½ï¿½ï¿½
+
+int_program3:
+sw $sp,0x00000800($zero)
+addiu $sp,$zero,0x00000800 #ï¿½ï¿½Ê¼ï¿½ï¿½Õ»Ö¸ï¿½ï¿½
+
+addi $sp,$sp,-4 #ï¿½ï¿½ï¿½ï¿½ï¿½Ö³ï¿½
+sw $s1,0($sp)
+addi $sp,$sp,-4
+sw $a0,0($sp)
+addi $sp,$sp,-4
+sw $v0,0($sp)
+
+
+addi $s1,$zero,3     #                ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ²ï¿½ï¿½ï¿½ 
+sll $s1, $s1, 28   #ï¿½ß¼ï¿½ï¿½ï¿½ï¿½ï¿½31Î» $s1=0x80000000
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+syscall                 # we are out of here.  
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+syscall                 # we are out of here.  
+
+
+sra $s1, $s1, 4    #0XF0000000-->0XFF000000
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+syscall                 # we are out of here.  
+
+
+sra $s1, $s1, 4    #0XFF000000-->0XFFF00000
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+syscall                 # we are out of here.  
+
+sra $s1, $s1, 4    
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+syscall                 # we are out of here.  
+
+sra $s1, $s1, 4    
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+syscall                 # we are out of here.  
+
+
+sra $s1, $s1, 4    
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+syscall                 # we are out of here.  
+
+
+sra $s1, $s1, 4    
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+syscall                 # we are out of here.  
+
+
+sra $s1, $s1, 4    
+
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+
+
+lw $v0,0($sp) #ï¿½Ö¸ï¿½ï¿½Ö³ï¿½
+addi $sp,$sp,4
+lw $a0,0($sp)
+addi $sp,$sp,4
+lw $s1,0($sp)
+addi $sp,$sp,4
+lw $sp,0($sp)
+eret #ï¿½ï¿½ï¿½ï¿½
+
+int_program4:
+sw $sp,0x00000800($zero)
+addiu $sp,$zero,0x00000800 #ï¿½ï¿½Ê¼ï¿½ï¿½Õ»Ö¸ï¿½ï¿½
+
+addi $sp,$sp,-4 #ï¿½ï¿½ï¿½ï¿½ï¿½Ö³ï¿½
+sw $s1,0($sp)
+addi $sp,$sp,-4
+sw $a0,0($sp)
+addi $sp,$sp,-4
+sw $v0,0($sp)
+
+
+addi $s1,$zero,4     #                ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ²ï¿½ï¿½ï¿½ 
+sll $s1, $s1, 28   #ï¿½ß¼ï¿½ï¿½ï¿½ï¿½ï¿½31Î» $s1=0x80000000
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+syscall                 # we are out of here.  
+
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+syscall                 # we are out of here.  
+
+
+sra $s1, $s1, 4    #0XF0000000-->0XFF000000
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+syscall                 # we are out of here.  
+
+
+sra $s1, $s1, 4    #0XFF000000-->0XFFF00000
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+syscall                 # we are out of here.  
+
+sra $s1, $s1, 4    
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+syscall                 # we are out of here.  
+
+sra $s1, $s1, 4    
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+syscall                 # we are out of here.  
+
+
+sra $s1, $s1, 4    
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+syscall                 # we are out of here.  
+
+
+sra $s1, $s1, 4    
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+syscall                 # we are out of here.  
+
+
+sra $s1, $s1, 4    
+
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+
+
+lw $v0,0($sp) #ï¿½Ö¸ï¿½ï¿½Ö³ï¿½
+addi $sp,$sp,4
+lw $a0,0($sp)
+addi $sp,$sp,4
+lw $s1,0($sp)
+addi $sp,$sp,4
+lw $sp,0($sp)
+eret #ï¿½ï¿½ï¿½ï¿½
