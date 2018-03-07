@@ -28,7 +28,7 @@ module testbench();
 		$dumpfile("counter_test.vcd");
 		$dumpvars(0, m_I9);
 
-		#5000 pro_reset[0] = 1;
+		#20000 pro_reset[0] = 1;
 		#1000 pro_reset[0] = 0;
 		#10000 pro_reset[1] = 1;
 		#1000 pro_reset[1] = 0;

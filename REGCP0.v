@@ -63,8 +63,8 @@ module REGCP0(in_RST,in_CLK,WE,rW,W,rA,A,out_IE,out_INM,in_BK,in_NIE,in_WB_PC,ou
 		if(in_RST)CP0[2] <= 0;
 		else begin
 			if(in_WBPCOUT != 0) begin 
-				if((in_WBIS[31:26]==6'b100011 || in_WBIS[31:26] == 6'b100101)&&(in_MEMPCOUT == 0))CP0[2] <= in_WB_PC-1;
-				else CP0[2] <= in_WB_PC;
+				if((in_WBIS[31:26]==6'b100011 || in_WBIS[31:26] == 6'b100101)&&(in_MEMPCOUT == 0))CP0[2] <= in_WB_PC-2;
+				else CP0[2] <= in_WB_PC-1;
 				//CP0[2] <= in_WB_PC;
 			end
 			else if(in_MEMPCOUT != 0)CP0[2] <= in_MEMPCOUT;
