@@ -17,9 +17,9 @@ module IRDECODE(in_code,out_addr);
 	always @(*) begin
 		case(in_code)//generate interrupt processing addr
 			2'b00:out_addr <= 32'h0000;//45
-			2'b01:out_addr <= 32'h0045;//78
-			2'b10:out_addr <= 32'h0078;//AB
-			2'b11:out_addr <= 32'h00AB;//DE
+			2'b01:out_addr <= 32'h00DB;//78
+			2'b10:out_addr <= 32'h010E;//AB
+			2'b11:out_addr <= 32'h0141;//DE
 		endcase
 	end
 endmodule
