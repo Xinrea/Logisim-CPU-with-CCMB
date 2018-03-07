@@ -83,3 +83,326 @@ sort_next:
  addi   $v0,$zero,10         # system call for exit
  syscall                  # we are out of here.   
  #MIPS处理器实现中请用停机指令实现syscall
+ 
+ int_program1:
+sw $sp,0x00000800($zero)
+addiu $sp,$zero,0x00000800 #初始化栈指针
+
+addi $sp,$sp,-4 #保存现场
+sw $s1,0($sp)
+addi $sp,$sp,-4
+sw $a0,0($sp)
+addi $sp,$sp,-4
+sw $v0,0($sp)
+
+
+addi $s1,$zero,1     #                算术右移测试 
+sll $s1, $s1, 28   #逻辑左移31位 $s1=0x80000000
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+syscall                 # we are out of here.  
+
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+syscall                 # we are out of here.  
+
+
+sra $s1, $s1, 4    #0XF0000000-->0XFF000000
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+syscall                 # we are out of here.  
+
+
+sra $s1, $s1, 4    #0XFF000000-->0XFFF00000
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+syscall                 # we are out of here.  
+
+sra $s1, $s1, 4    
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+syscall                 # we are out of here.  
+
+sra $s1, $s1, 4    
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+syscall                 # we are out of here.  
+
+
+sra $s1, $s1, 4    
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+syscall                 # we are out of here.  
+
+
+sra $s1, $s1, 4    
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+syscall                 # we are out of here.  
+
+
+sra $s1, $s1, 4    
+
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+
+
+lw $v0,0($sp) #恢复现场
+addi $sp,$sp,4
+lw $a0,0($sp)
+addi $sp,$sp,4
+lw $s1,0($sp)
+addi $sp,$sp,4
+lw $sp,0($sp)
+eret #返回
+
+int_program2:
+sw $sp,0x00000800($zero)
+addiu $sp,$zero,0x00000800 #初始化栈指针
+
+addi $sp,$sp,-4 #保存现场
+sw $s1,0($sp)
+addi $sp,$sp,-4
+sw $a0,0($sp)
+addi $sp,$sp,-4
+sw $v0,0($sp)
+
+
+addi $s1,$zero,2     #                算术右移测试 
+sll $s1, $s1, 28   #逻辑左移31位 $s1=0x80000000
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+syscall                 # we are out of here.  
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+syscall                 # we are out of here.  
+
+
+sra $s1, $s1, 4    #0XF0000000-->0XFF000000
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+syscall                 # we are out of here.  
+
+
+sra $s1, $s1, 4    #0XFF000000-->0XFFF00000
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+syscall                 # we are out of here.  
+
+sra $s1, $s1, 4    
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+syscall                 # we are out of here.  
+
+sra $s1, $s1, 4    
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+syscall                 # we are out of here.  
+
+
+sra $s1, $s1, 4    
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+syscall                 # we are out of here.  
+
+
+sra $s1, $s1, 4    
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+syscall                 # we are out of here.  
+
+
+sra $s1, $s1, 4    
+
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+
+
+lw $v0,0($sp) #恢复现场
+addi $sp,$sp,4
+lw $a0,0($sp)
+addi $sp,$sp,4
+lw $s1,0($sp)
+addi $sp,$sp,4
+lw $sp,0($sp)
+eret #返回
+
+int_program3:
+sw $sp,0x00000800($zero)
+addiu $sp,$zero,0x00000800 #初始化栈指针
+
+addi $sp,$sp,-4 #保存现场
+sw $s1,0($sp)
+addi $sp,$sp,-4
+sw $a0,0($sp)
+addi $sp,$sp,-4
+sw $v0,0($sp)
+
+
+addi $s1,$zero,3     #                算术右移测试 
+sll $s1, $s1, 28   #逻辑左移31位 $s1=0x80000000
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+syscall                 # we are out of here.  
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+syscall                 # we are out of here.  
+
+
+sra $s1, $s1, 4    #0XF0000000-->0XFF000000
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+syscall                 # we are out of here.  
+
+
+sra $s1, $s1, 4    #0XFF000000-->0XFFF00000
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+syscall                 # we are out of here.  
+
+sra $s1, $s1, 4    
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+syscall                 # we are out of here.  
+
+sra $s1, $s1, 4    
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+syscall                 # we are out of here.  
+
+
+sra $s1, $s1, 4    
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+syscall                 # we are out of here.  
+
+
+sra $s1, $s1, 4    
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+syscall                 # we are out of here.  
+
+
+sra $s1, $s1, 4    
+
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+
+
+lw $v0,0($sp) #恢复现场
+addi $sp,$sp,4
+lw $a0,0($sp)
+addi $sp,$sp,4
+lw $s1,0($sp)
+addi $sp,$sp,4
+lw $sp,0($sp)
+eret #返回
+
+int_program4:
+sw $sp,0x00000800($zero)
+addiu $sp,$zero,0x00000800 #初始化栈指针
+
+addi $sp,$sp,-4 #保存现场
+sw $s1,0($sp)
+addi $sp,$sp,-4
+sw $a0,0($sp)
+addi $sp,$sp,-4
+sw $v0,0($sp)
+
+
+addi $s1,$zero,4     #                算术右移测试 
+sll $s1, $s1, 28   #逻辑左移31位 $s1=0x80000000
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+syscall                 # we are out of here.  
+
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+syscall                 # we are out of here.  
+
+
+sra $s1, $s1, 4    #0XF0000000-->0XFF000000
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+syscall                 # we are out of here.  
+
+
+sra $s1, $s1, 4    #0XFF000000-->0XFFF00000
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+syscall                 # we are out of here.  
+
+sra $s1, $s1, 4    
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+syscall                 # we are out of here.  
+
+sra $s1, $s1, 4    
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+syscall                 # we are out of here.  
+
+
+sra $s1, $s1, 4    
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+syscall                 # we are out of here.  
+
+
+sra $s1, $s1, 4    
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+syscall                 # we are out of here.  
+
+
+sra $s1, $s1, 4    
+
+
+add    $a0,$0,$s1       #display $s1
+addi   $v0,$0,34         # display hex
+
+
+lw $v0,0($sp) #恢复现场
+addi $sp,$sp,4
+lw $a0,0($sp)
+addi $sp,$sp,4
+lw $s1,0($sp)
+addi $sp,$sp,4
+lw $sp,0($sp)
+eret #返回
+

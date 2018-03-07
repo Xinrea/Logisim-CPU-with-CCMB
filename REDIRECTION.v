@@ -160,28 +160,40 @@ module REDIRECTION(in_EN,in_CLK,in_RST,in_J,in_JS,in_PPWE,in_PPPWE,in_IS,in_PIS,
 	always @(*) begin
 		case(choose2)
 			2'b00:begin
-				out_ALUREDI[2] <= ((PPPRT==PRS)^(shift_is))&(in_PPPWE&IGNORE2&((PPPRT==PRS&~(in_PIS==0)&~(in_PPPIS==0))));
+				if(~(in_PPIS==0)&PPPRT==PPRT)begin
+					out_ALUREDI[2] <= 0;
+				end
+				else out_ALUREDI[2] <= ((PPPRT==PRS)^(shift_is))&(in_PPPWE&IGNORE2&((PPPRT==PRS&~(in_PIS==0)&~(in_PPPIS==0))));
 				if(~(in_PPIS==0)&PPPRD==PPRD)begin
 					out_ALUREDI[3] <= 0;
 				end
 				else out_ALUREDI[3] <= ((0)^(shift_is))&(in_PPPWE&IGNORE2&((PPPRT==PRS&~(in_PIS==0)&~(in_PPPIS==0))));
 			end
 			2'b01:begin
-				out_ALUREDI[2] <= ((PPPRD==PRS)^(shift_is))&(in_PPPWE&IGNORE2&((PPPRD==PRS&~(in_PIS==0)&~(in_PPPIS==0))));
+				if(~(in_PPIS==0)&PPPRT==PPRT)begin
+					out_ALUREDI[2] <= 0;
+				end
+				else out_ALUREDI[2] <= ((PPPRD==PRS)^(shift_is))&(in_PPPWE&IGNORE2&((PPPRD==PRS&~(in_PIS==0)&~(in_PPPIS==0))));
 				if(~(in_PPIS==0)&PPPRD==PPRD)begin
 					out_ALUREDI[3] <= 0;
 				end
 				else out_ALUREDI[3] <= ((0)^(shift_is))&(in_PPPWE&IGNORE2&((PPPRD==PRS&~(in_PIS==0)&~(in_PPPIS==0))));
 			end
 			2'b10:begin
-				out_ALUREDI[2] <= (((PPPRT==PRS))^(shift_is))&(in_PPPWE&IGNORE2&(((PPPRT==PRT|PPPRT==PRS)&~(in_PIS==0)&~(in_PPPIS==0))));
+				if(~(in_PPIS==0)&PPPRT==PPRT)begin
+					out_ALUREDI[2] <= 0;
+				end
+				else out_ALUREDI[2] <= (((PPPRT==PRS))^(shift_is))&(in_PPPWE&IGNORE2&(((PPPRT==PRT|PPPRT==PRS)&~(in_PIS==0)&~(in_PPPIS==0))));
 				if(~(in_PPIS==0)&PPPRD==PPRD)begin
 					out_ALUREDI[3] <= 0;
 				end
 				else out_ALUREDI[3] <= ((PPPRT==PRT)^(shift_is))&(in_PPPWE&IGNORE2&(((PPPRT==PRS|PPPRT==PRT)&~(in_PIS==0)&~(in_PPPIS==0))));
 			end
 			2'b11:begin
-				out_ALUREDI[2] <= (((PPPRD==PRS))^(shift_is))&(in_PPPWE&IGNORE2&(((PPPRD==PRT|PPPRT==PRS)&~(in_PIS==0)&~(in_PPPIS==0))));
+				if(~(in_PPIS==0)&PPPRT==PPRT)begin
+					out_ALUREDI[2] <= 0;
+				end
+				else out_ALUREDI[2] <= (((PPPRD==PRS))^(shift_is))&(in_PPPWE&IGNORE2&(((PPPRD==PRT|PPPRT==PRS)&~(in_PIS==0)&~(in_PPPIS==0))));
 				if(~(in_PPIS==0)&PPPRD==PPRD)begin
 					out_ALUREDI[3] <= 0;
 				end

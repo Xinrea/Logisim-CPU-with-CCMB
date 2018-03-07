@@ -14,7 +14,7 @@ module MINT(in_CLK,in_RST,in_code,in_BK,in_eret,in_EPC,in_FDCLR,in_DECLR,R_FDCLR
 	input in_BK,in_eret;
 	input [31:0]in_EPC;
 	input in_FDCLR,in_DECLR;
-	output reg R_FDCLR,R_DECLR,R_EECLR;
+	output R_FDCLR,R_DECLR,R_EECLR;
 	output reg out_force;
 	output reg [31:0]out_pc;
 	output reg [3:0]out_IG;
@@ -23,14 +23,13 @@ module MINT(in_CLK,in_RST,in_code,in_BK,in_eret,in_EPC,in_FDCLR,in_DECLR,R_FDCLR
 	wire [31:0]int_addr;
 	initial out_IG <= 0;
 
+	assign R_FDCLR = in_FDCLR|in_RST|in_BK|in_eret;
+	assign R_DECLR = in_DECLR|in_RST|in_BK|in_eret;
+	assign R_EECLR = in_RST|in_BK|in_eret;
+
 	always @(posedge in_CLK) begin
-//	always @(posedge in_CLK or posedge in_BK or posedge in_eret or posedge in_FDCLR or posedge in_DECLR or posedge in_RST) begin
-//	always @(*) begin
 		if(in_BK)begin
 			out_NIE <= 0;//		
-			R_FDCLR <= 1;
-			R_DECLR <= 1;
-			R_EECLR <= 1;
 			out_force <= 1;
 			out_pc <= int_addr;
 			out_IG <= 0;
@@ -40,9 +39,6 @@ module MINT(in_CLK,in_RST,in_code,in_BK,in_eret,in_EPC,in_FDCLR,in_DECLR,R_FDCLR
 				out_pc <= in_EPC;
 				out_force <= 1;
 				out_NIE <= 1;
-				R_FDCLR <= 1;
-				R_DECLR <= 1;
-				R_EECLR <= 1;
 				case(rcode)
 					2'b00:out_IG <= 4'b0000;
 					2'b01:out_IG <= 4'b0001;
@@ -51,16 +47,12 @@ module MINT(in_CLK,in_RST,in_code,in_BK,in_eret,in_EPC,in_FDCLR,in_DECLR,R_FDCLR
 				endcase
 			end
 			else begin
-				R_FDCLR <= in_FDCLR|in_RST;
-				R_DECLR <= in_DECLR|in_RST;
-				R_EECLR <= in_RST;
 				out_force <= 0;
 				out_NIE <= 1;
 				out_IG <= 0;
 				out_pc <= in_EPC;
 			end
 		end
-
 	end
 
 	always @(posedge in_CLK or posedge in_RST) begin
