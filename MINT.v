@@ -1,7 +1,7 @@
 //==================================================================================================
 //  Filename      : MINT.v
 //  Created On    : 2018-03-06 10:49:50
-//  Last Modified : 2018-03-08 03:03:59
+//  Last Modified : 2018-03-08 08:35:51
 //  Revision      : 
 //
 //  Description   : 
@@ -30,24 +30,24 @@ module MINT(in_CLK,in_DCLK,in_RST,in_code,in_BK,in_eret,in_EPC,in_FDCLR,in_DECLR
 	assign R_EECLR = in_RST|in_BK|in_eret;
 
 	always @(posedge in_CLK or posedge flag) begin
-		if(in_BK)begin
-			out_NIE <= 0;//		
+		if(in_eret)begin
+			out_pc <= in_EPC;
 			out_force <= 1;
-			out_IG <= 0;
-			if(rcode[0]|rcode[1])out_pc <= in_EPC;
-			else out_pc <= int_addr;
+			out_NIE <= 1;
+			case(rcode)
+				2'b00:out_IG <= 4'b0000;
+				2'b01:out_IG <= 4'b0001;
+				2'b10:out_IG <= 4'b0010;
+				2'b11:out_IG <= 4'b0100;
+			endcase
+
 		end
 		else begin
-			if(in_eret)begin
-				out_pc <= in_EPC;
+			if(in_BK)begin
+				out_NIE <= 0;//		
 				out_force <= 1;
-				out_NIE <= 1;
-				case(rcode)
-					2'b00:out_IG <= 4'b0000;
-					2'b01:out_IG <= 4'b0001;
-					2'b10:out_IG <= 4'b0010;
-					2'b11:out_IG <= 4'b0100;
-				endcase
+				out_IG <= 0;
+				out_pc <= int_addr;
 			end
 			else begin
 				out_force <= 0;
